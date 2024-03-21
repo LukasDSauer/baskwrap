@@ -14,5 +14,7 @@ RoxygenNote: 7.2.3
 Imports: 
     baskexact,
     basksim (>= 0.1.0)
-Remotes:  
+Remotes: 
     lbau7/basksim
+URL: https://github.com/LukasDSauer/baskwrap
+BugReports: https://github.com/LukasDSauer/baskwrap/issues
