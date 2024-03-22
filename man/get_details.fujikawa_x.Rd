@@ -15,6 +15,8 @@
   logbase = 2,
   iter = 1000,
   data = NULL,
+  weight_fun = baskexact::weights_fujikawa,
+  weight_params = list(epsilon = epsilon, tau = tau, logbase = logbase),
   ...
 )
 }
