@@ -66,8 +66,6 @@ get_details.fujikawa_x <- function(design, n, p1 = NULL, lambda, level = 0.95,
     res_estim <- baskexact::estim(design = design$design_exact, p1 = p1, n = n,
                                   lambda = lambda, weight_fun = weight_fun,
                                   weight_params = weight_params,
-                                  globalweight_fun = globalweight_fun,
-                                  globalweight_params = globalweight_params,
                                   ...)
     return(list(
       Rejection_Probabilities = Rejection_Probabilities,
