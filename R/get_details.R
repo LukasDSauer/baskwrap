@@ -1,19 +1,25 @@
-#' Title
+#' Get Details of a Basket Trial Simulation with Fujikawa's Design
 #'
-#' @param design
-#' @param n
-#' @param p1
-#' @param lambda
-#' @param level
-#' @param epsilon
-#' @param tau
-#' @param logbase
-#' @param iter
-#' @param data
-#' @param ...
+#' This wrapper functions returns details for basket trial design. It calculates
+#' the details using backends from two different R packages:
+#' * If `design$backend == "sim"`, the details are calculated using
+#' `basksim::get_details.fujikawa`.
+#' * If `design$backend == "exact"`, the details are calculated using
+#' `baskexact::toer`, `baskexact::pow` and `baskexact::estim`. Note that the
+#' standard weight function `baskexact::weights_fujikawa` calculates the weights
+#' anew for each of the three function calls. This may compromise performance
+#' and can be fixed by manually calculating the weights beforehand.
 #'
-#' @return
+#' @param design An object of class `fujikawa_x`.
+#' @inheritParams basksim::get_details.fujikawa
+#' @param weight_fun Which functions should be used to calculated the pairwise
+#' weights? Default is `baskexact::weights_fujikawa`.
+#' @param weight_params A list of tuning parameters specific to `weight_fun`.
+#' By default, it takes the function arguments `epsilon`, `tau` and `logbase`.
+#' @param ... Further arguments, e.g. to be supplied to the backend functions
+#'  from `baskexact` or from `basksim`
 #'
+#' @inherit basksim::get_details.fujikawa return
 #' @import basksim
 #'
 #' @export

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_details.R
 \name{get_details.fujikawa_x}
 \alias{get_details.fujikawa_x}
-\title{Title}
+\title{Get Details of a Basket Trial Simulation with Fujikawa's Design}
 \usage{
 \method{get_details}{fujikawa_x}(
   design,
@@ -21,10 +21,58 @@
 )
 }
 \arguments{
-\item{...}{}
+\item{design}{An object of class \code{fujikawa_x}.}
+
+\item{n}{The sample size per basket.}
+
+\item{p1}{Probabilities under the alternative hypothesis.}
+
+\item{lambda}{The posterior probability threshold.}
+
+\item{level}{Level of the credibility intervals.}
+
+\item{epsilon}{Tuning parameter that determines the amount of borrowing.
+See \code{\link[basksim]{setup_fujikawa}}).}
+
+\item{tau}{Tuning parameter that determines how similar the baskets
+have to be that information is shared. See \code{\link[basksim]{setup_fujikawa}}).}
+
+\item{logbase}{Tuning parameter. The base of the logarithm that is used to
+calculate the Jensen-Shannon divergence.}
+
+\item{iter}{The number of iterations in the simulation. Is ignored if
+\code{data} is specified.}
+
+\item{data}{A data matrix with k column with the number of responses for each
+basket. Has to be generated with \code{get_data}. If \code{data} is used,
+then \code{iter} is ignored.}
+
+\item{weight_fun}{Which functions should be used to calculated the pairwise
+weights? Default is \code{baskexact::weights_fujikawa}.}
+
+\item{weight_params}{A list of tuning parameters specific to \code{weight_fun}.
+By default, it takes the function arguments \code{epsilon}, \code{tau} and \code{logbase}.}
+
+\item{...}{Further arguments, e.g. to be supplied to the backend functions
+from \code{baskexact} or from \code{basksim}}
+}
+\value{
+A list containing the rejection probabilites, posterior means,
+mean squared errors and mean limits of HDI intervals for all baskets as well
+as the family-wise error rate and the experiment-wise power.
 }
 \description{
-Title
+This wrapper functions returns details for basket trial design. It calculates
+the details using backends from two different R packages:
+\itemize{
+\item If \code{design$backend == "sim"}, the details are calculated using
+\code{basksim::get_details.fujikawa}.
+\item If \code{design$backend == "exact"}, the details are calculated using
+\code{baskexact::toer}, \code{baskexact::pow} and \code{baskexact::estim}. Note that the
+standard weight function \code{baskexact::weights_fujikawa} calculates the weights
+anew for each of the three function calls. This may compromise performance
+and can be fixed by manually calculating the weights beforehand.
+}
 }
 \examples{
 design <- setup_fujikawa_x(k = 3, p0 = 0.2)
