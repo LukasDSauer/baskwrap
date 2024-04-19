@@ -20,22 +20,23 @@
 #'  from `baskexact` or from `basksim`
 #'
 #' @inherit basksim::get_details.fujikawa return
-#' @import basksim
-#'
-#' @export
 #'
 #' @examples
 #' design <- setup_fujikawa_x(k = 3, p0 = 0.2)
 #' get_details(design = design, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
 #'             epsilon = 2, tau = 0, iter = 100)
-get_details.fujikawa_x <- function(design, n, p1 = NULL, lambda, level = 0.95,
-                                 epsilon, tau, logbase = 2, iter = 1000,
-                                 data = NULL,
-                                 weight_fun = baskexact::weights_fujikawa,
-                                 weight_params = list(epsilon = epsilon,
+#'
+#' @export
+#' @import basksim
+#' @export get_details
+get_details.fujikawa_x <- function(design, ...,
+                                   n, p1 = NULL, lambda, level = 0.95,
+                                   epsilon, tau, logbase = 2, iter = 1000,
+                                   data = NULL,
+                                   weight_fun = baskexact::weights_fujikawa,
+                                   weight_params = list(epsilon = epsilon,
                                                       tau = tau,
-                                                      logbase = logbase),
-                                 ...){
+                                                      logbase = logbase)){
   if(design$backend == "sim"){
     return(c(NextMethod(), backend = "sim"))
   } else if(design$backend == "exact"){

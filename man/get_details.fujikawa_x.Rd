@@ -6,6 +6,7 @@
 \usage{
 \method{get_details}{fujikawa_x}(
   design,
+  ...,
   n,
   p1 = NULL,
   lambda,
@@ -16,12 +17,14 @@
   iter = 1000,
   data = NULL,
   weight_fun = baskexact::weights_fujikawa,
-  weight_params = list(epsilon = epsilon, tau = tau, logbase = logbase),
-  ...
+  weight_params = list(epsilon = epsilon, tau = tau, logbase = logbase)
 )
 }
 \arguments{
 \item{design}{An object of class \code{fujikawa_x}.}
+
+\item{...}{Further arguments, e.g. to be supplied to the backend functions
+from \code{baskexact} or from \code{basksim}}
 
 \item{n}{The sample size per basket.}
 
@@ -52,14 +55,11 @@ weights? Default is \code{baskexact::weights_fujikawa}.}
 
 \item{weight_params}{A list of tuning parameters specific to \code{weight_fun}.
 By default, it takes the function arguments \code{epsilon}, \code{tau} and \code{logbase}.}
-
-\item{...}{Further arguments, e.g. to be supplied to the backend functions
-from \code{baskexact} or from \code{basksim}}
 }
 \value{
-A list containing the rejection probabilites, posterior means,
+A list containing the rejection probabilities, posterior means,
 mean squared errors and mean limits of HDI intervals for all baskets as well
-as the family-wise error rate and the experiment-wise power.
+as the family-wise error rate.
 }
 \description{
 This wrapper functions returns details for basket trial design. It calculates
@@ -78,4 +78,5 @@ and can be fixed by manually calculating the weights beforehand.
 design <- setup_fujikawa_x(k = 3, p0 = 0.2)
 get_details(design = design, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
             epsilon = 2, tau = 0, iter = 100)
+
 }

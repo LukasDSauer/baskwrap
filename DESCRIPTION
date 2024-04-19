@@ -1,5 +1,5 @@
 Package: baskwrap
-Title: Wrapper Package for Several Basket Trial R Packages.
+Title: Wrapper Package for Several Basket Trial R Packages
 Version: 0.0.0.9000
 Authors@R: 
     person("Lukas D", "Sauer", , "sauer@imbi.uni-heidelberg.de",
