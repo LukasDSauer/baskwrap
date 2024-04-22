@@ -29,7 +29,10 @@ basksim::get_details
 #' design <- setup_fujikawa_x(k = 3, p0 = 0.2)
 #' get_details(design = design, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
 #'             epsilon = 2, tau = 0, iter = 100)
-#'
+#' design_x <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "exact")
+#' get_details(design = design_x, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
+#'             epsilon = 2, tau = 0, weight_fun = baskexact::weights_fujikawa,
+#'             logbase = exp(1))
 #' @export
 get_details.fujikawa_x <- function(design, ...,
                                    n, p1 = NULL, lambda, level = 0.95,
@@ -37,8 +40,8 @@ get_details.fujikawa_x <- function(design, ...,
                                    data = NULL,
                                    weight_fun = baskexact::weights_fujikawa,
                                    weight_params = list(epsilon = epsilon,
-                                                      tau = tau,
-                                                      logbase = logbase)){
+                                                        tau = tau,
+                                                        logbase = logbase)){
   if(design$backend == "sim"){
     return(c(NextMethod(), backend = "sim"))
   } else if(design$backend == "exact"){
