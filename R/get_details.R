@@ -1,7 +1,11 @@
+#' @importFrom basksim get_details
+#' @export
+basksim::get_details
 #' Get Details of a Basket Trial Simulation with Fujikawa's Design
 #'
-#' This wrapper functions returns details for basket trial design. It calculates
-#' the details using backends from two different R packages:
+#' This wrapper functions returns details for basket trial design.
+#'
+#' It calculates the details using backends from two different R packages:
 #' * If `design$backend == "sim"`, the details are calculated using
 #' `basksim::get_details.fujikawa`.
 #' * If `design$backend == "exact"`, the details are calculated using
@@ -10,14 +14,14 @@
 #' anew for each of the three function calls. This may compromise performance
 #' and can be fixed by manually calculating the weights beforehand.
 #'
+#'
 #' @param design An object of class `fujikawa_x`.
 #' @inheritParams basksim::get_details.fujikawa
 #' @param weight_fun Which functions should be used to calculated the pairwise
 #' weights? Default is `baskexact::weights_fujikawa`.
 #' @param weight_params A list of tuning parameters specific to `weight_fun`.
 #' By default, it takes the function arguments `epsilon`, `tau` and `logbase`.
-#' @param ... Further arguments, e.g. to be supplied to the backend functions
-#'  from `baskexact` or from `basksim`
+#' @param ... Further arguments.
 #'
 #' @inherit basksim::get_details.fujikawa return
 #'
@@ -27,8 +31,6 @@
 #'             epsilon = 2, tau = 0, iter = 100)
 #'
 #' @export
-#' @import basksim
-#' @export get_details
 get_details.fujikawa_x <- function(design, ...,
                                    n, p1 = NULL, lambda, level = 0.95,
                                    epsilon, tau, logbase = 2, iter = 1000,
@@ -63,7 +65,7 @@ get_details.fujikawa_x <- function(design, ...,
       res <- baskexact::toer(design$design_exact, p1 = p1, n = n,
                              lambda = lambda, weight_fun = weight_fun,
                              weight_params = weight_params, results = "group")
-      res_ewp <- baskexact::toer(design$design_exact, p1 = p1, n = n,
+      res_ewp <- baskexact::pow(design$design_exact, p1 = p1, n = n,
                              lambda = lambda, weight_fun = weight_fun,
                              weight_params = weight_params, results = "ewp")
       FWER <- res$fwer

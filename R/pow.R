@@ -1,3 +1,5 @@
+## TODO: Attention --> pow is not a generic in basksim. Hence, I need
+## to define this (as I did for toer).
 pow.fujikawa_x <- function(design, n, p1 = NULL, lambda, design_params = list(),
                             iter = 1000, data = NULL, weight_fun,
                             weight_params = list(), globalweight_fun = NULL,

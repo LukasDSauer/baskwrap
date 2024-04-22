@@ -23,12 +23,12 @@
 \arguments{
 \item{design}{An object of class \code{fujikawa_x}.}
 
-\item{...}{Further arguments, e.g. to be supplied to the backend functions
-from \code{baskexact} or from \code{basksim}}
+\item{...}{Further arguments.}
 
 \item{n}{The sample size per basket.}
 
-\item{p1}{Probabilities under the alternative hypothesis.}
+\item{p1}{Probabilities used for the simulation. If \code{NULL}
+then all probabilities are set to p0.}
 
 \item{lambda}{The posterior probability threshold.}
 
@@ -57,13 +57,15 @@ weights? Default is \code{baskexact::weights_fujikawa}.}
 By default, it takes the function arguments \code{epsilon}, \code{tau} and \code{logbase}.}
 }
 \value{
-A list containing the rejection probabilities, posterior means,
+A list containing the rejection probabilites, posterior means,
 mean squared errors and mean limits of HDI intervals for all baskets as well
-as the family-wise error rate.
+as the family-wise error rate and the experiment-wise power.
 }
 \description{
-This wrapper functions returns details for basket trial design. It calculates
-the details using backends from two different R packages:
+This wrapper functions returns details for basket trial design.
+}
+\details{
+It calculates the details using backends from two different R packages:
 \itemize{
 \item If \code{design$backend == "sim"}, the details are calculated using
 \code{basksim::get_details.fujikawa}.
