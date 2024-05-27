@@ -51,7 +51,6 @@ toer.fujikawa_x <- function(design, n, p1 = NULL, lambda, design_params = list()
                             weight_params = list(), globalweight_fun = NULL,
                             globalweight_params = list(),
                             results = c("fwer", "group"),...){
-  ## Hier gibt es eine toer funktion in basksim und in baskexact
   if(design$backend == "sim"){
     return(NextMethod())
   } else if(design$backend == "exact"){
