@@ -79,6 +79,9 @@ get_details.fujikawa_x <- function(design, ...,
                                   lambda = lambda, weight_fun = weight_fun,
                                   weight_params = weight_params,
                                   ...)
+    res_ecd <- baskexact::ecd(design = design$design_exact, p1 = p1, n = n,
+                              lambda = lambda, weight_fun = weight_fun,
+                              weight_params = weight_params, ...)
     return(list(
       Rejection_Probabilities = Rejection_Probabilities,
       FWER = FWER,
@@ -87,6 +90,7 @@ get_details.fujikawa_x <- function(design, ...,
       MSE = res_estim$MSE,
       Lower_CL = numeric(),
       Upper_CL = numeric(),
+      ECD = res_ecd,
       backend = "exact"
     ))
   } else {
