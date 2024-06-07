@@ -91,6 +91,8 @@ get_details.fujikawa_x <- function(design, ...,
       Lower_CL = numeric(),
       Upper_CL = numeric(),
       ECD = res_ecd,
+      p0 = design$p0,
+      p1 = p1,
       backend = "exact"
     ))
   } else {
