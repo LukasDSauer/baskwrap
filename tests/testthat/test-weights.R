@@ -11,20 +11,17 @@ test_that("weights_fujikawa_vanilla and *_tuned deliver the same results as
   #                                    epsilon = 1, tau = 0)
   # saveRDS(ref, paste0(testthat::test_path(),
   #         "/refdata/ref_weights_fujikawa_vanilla.RDS"))
-  ref_tuned <- baskexact::weights_fujikawa(design = design$design_exact,
-                                           n = n,
-                                           lambda = NULL,
-                                           epsilon = 2.5, tau = 0.2)
-  saveRDS(ref_tuned, paste0(testthat::test_path(),
-          "/refdata/ref_weights_fujikawa_tuned.RDS"))
+  # ref_tuned <- baskexact::weights_fujikawa(design = design$design_exact,
+  #                                          n = n,
+  #                                          lambda = NULL,
+  #                                          epsilon = 2.5, tau = 0.2)
+  # saveRDS(ref_tuned, paste0(testthat::test_path(),
+  #         "/refdata/ref_weights_fujikawa_tuned.RDS"))
   ref_vanilla <- readRDS(paste0(testthat::test_path(),
                             "/refdata/ref_weights_fujikawa_vanilla.RDS"))
   ref_tuned <- readRDS(paste0(testthat::test_path(),
                                 "/refdata/ref_weights_fujikawa_tuned.RDS"))
-  # Class changed to avoid type clash
-  class(ref_vanilla) <- "weight_mat_fujikawa"
-  class(ref_tuned) <- "weight_mat_fujikawa"
-  # TODO: Reference for weight_mat_tuned()
+  # Comparison
   expect_equal(weight_mat_vanilla, ref_vanilla)
   expect_equal(weight_mat_tuned, ref_tuned)
 })
