@@ -87,18 +87,10 @@ get_details(design = design_x, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
 # If you call get_details() with backend = "exact" multiple without
 # changing design and n, it can make sense to save the weights and supply
 # them separately using a custom function. This can save run time.
-weight_mat <- weights_fujikawa_vanilla(design_x, n = 20)
 weight_mat_vanilla <- weights_fujikawa_vanilla(design_x, n = 20,
                                                logbase = exp(1))
-weights_from_save <- function(design,
-                              n,
-                              lambda,
-                              epsilon,
+weights_from_save <- function(epsilon,
                               tau,
-                              logbase,
-                              prune = FALSE,
-                              globalweight_fun = NULL,
-                              globalweight_params = list(),
                               ...) {
   return(weights_fujikawa_tuned(weight_mat_vanilla,
                                 epsilon = epsilon,
@@ -110,5 +102,5 @@ get_details(design = design_x,
             lambda = 0.95,
             epsilon = 2, tau = 0,
             weight_fun = weights_from_save,
-            logbase = exp(1))
+            logbase = NULL)
 }

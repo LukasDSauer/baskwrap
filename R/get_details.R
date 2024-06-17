@@ -36,18 +36,10 @@ basksim::get_details
 #' # If you call get_details() with backend = "exact" multiple without
 #' # changing design and n, it can make sense to save the weights and supply
 #' # them separately using a custom function. This can save run time.
-#' weight_mat <- weights_fujikawa_vanilla(design_x, n = 20)
 #' weight_mat_vanilla <- weights_fujikawa_vanilla(design_x, n = 20,
 #'                                                logbase = exp(1))
-#' weights_from_save <- function(design,
-#'                               n,
-#'                               lambda,
-#'                               epsilon,
+#' weights_from_save <- function(epsilon,
 #'                               tau,
-#'                               logbase,
-#'                               prune = FALSE,
-#'                               globalweight_fun = NULL,
-#'                               globalweight_params = list(),
 #'                               ...) {
 #'   return(weights_fujikawa_tuned(weight_mat_vanilla,
 #'                                 epsilon = epsilon,
@@ -59,7 +51,7 @@ basksim::get_details
 #'             lambda = 0.95,
 #'             epsilon = 2, tau = 0,
 #'             weight_fun = weights_from_save,
-#'             logbase = exp(1))
+#'             logbase = NULL)
 #' @export
 get_details.fujikawa_x <- function(design, ...,
                                    n, p1 = NULL, lambda, level = 0.95,
