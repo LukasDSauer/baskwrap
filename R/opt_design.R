@@ -17,4 +17,4 @@ opt_design.fujikawa_x <- function(design, n, alpha, design_params = list(), scen
     stop("design$backend must be 'sim' or 'exact'")
   }
 }
-## Hier gibt es eine Funktion in basksim und baskexact
+
