@@ -17,6 +17,9 @@ weights_fujikawa_tuned(weight_mat, epsilon = 1.25, tau = 0.5, logbase = 2, ...)
 
 \item{...}{Further arguments.}
 
+\item{weight_mat}{An untuned matrix including the weights of all possible
+pairwise outcomes.}
+
 \item{epsilon}{A tuning parameter that determines the amount of borrowing.
 See details for more information.}
 
@@ -28,7 +31,8 @@ used to compute the Jensen-Shannon divergence. See details for more
 information.}
 }
 \value{
-A matrix including the weights of all possible pairwise outcomes.
+A matrix including the weights of all possible pairwise outcomes,
+its class is \code{"weight_mat_fujikawa"}.
 }
 \description{
 The function \code{weights_fujikawa_vanilla} is a wrapper of
@@ -49,5 +53,5 @@ named \code{"weight_mat_fujikawa"}.
 design <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "exact")
 weight_mat <- weights_fujikawa_vanilla(design, n = 20)
 weight_mat_tuned <- weights_fujikawa_tuned(weight_mat, epsilon = 1.25,
-                                           tau = 0.5, logbase = 2, ...)
+                                           tau = 0.5, logbase = 2)
 }

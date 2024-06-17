@@ -14,14 +14,17 @@
 #' named `"weight_mat_fujikawa"`.
 #'
 #' @inheritParams baskexact::weights_fujikawa
-#' @return A matrix including the weights of all possible pairwise outcomes.
+#' @param weight_mat An untuned matrix including the weights of all possible
+#' pairwise outcomes.
+#' @return A matrix including the weights of all possible pairwise outcomes,
+#' its class is `"weight_mat_fujikawa"`.
 #' @export
 #'
 #' @examples
 #' design <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "exact")
 #' weight_mat <- weights_fujikawa_vanilla(design, n = 20)
 #' weight_mat_tuned <- weights_fujikawa_tuned(weight_mat, epsilon = 1.25,
-#'                                            tau = 0.5, logbase = 2, ...)
+#'                                            tau = 0.5, logbase = 2)
 weights_fujikawa_vanilla <- function(design, n, ...){
   if(is.null(design$design_exact)){
     design <- set_design_exact(design)
@@ -33,6 +36,7 @@ weights_fujikawa_vanilla <- function(design, n, ...){
   return(weight_mat)
 }
 
+#' @export
 #' @rdname weights_fujikawa_vanilla
 weights_fujikawa_tuned <- function(weight_mat, epsilon = 1.25,
                                    tau = 0.5, logbase = 2, ...){
