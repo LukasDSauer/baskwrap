@@ -14,6 +14,7 @@ test_that("results coincide with published results by Fujikawa et al.", {
   set.seed(169)
   design_sim <- setup_fujikawa_x(k = k, p0 = p0, shape1 = shape1,
                                  shape2 = shape2, backend = "sim")
+
   design_x <- setup_fujikawa_x(k = k, p0 = p0, shape1 = shape1,
                                shape2 = shape2, backend = "exact")
   details_sim_i <- get_details(design = design_sim, n = n, p1 = p1,

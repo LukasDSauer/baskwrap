@@ -44,7 +44,7 @@ with Fujikawa et al.'s tuning rules.
 }
 \examples{
 design <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "exact")
-weight_mat <- weights_fujikawa_vanilla(design, n = 20)
+weight_mat <- weights_fujikawa_vanilla(design, n = 20, logbase = 2)
 weight_mat_tuned <- weights_fujikawa_tuned(weight_mat, epsilon = 1.25,
                                            tau = 0.5)
 }

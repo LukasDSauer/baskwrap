@@ -14,6 +14,17 @@ basksim::get_details
 #' anew for each of the three function calls. This may compromise performance
 #' and can be fixed by manually calculating the weights beforehand.
 #'
+#' For the `baskexact` backend, the number of details is a relevant factor for
+#' the function's runtime. Hence, one can select precisely which details should
+#' be calculated:
+#' * If `which_details == "all"`, everything will be calculated.
+#' * If `"FWER" %in% which_details`, then FWER will be calculated.
+#' * If `"EWP" %in% which_details`, then EWP will be calculated.
+#' * If `"Rejection_Probabilities" %in% which_details`, then per-basket
+#' rejection probabilities will be calculated.
+#' * If  `"ECD" %in% which_details`, then ECD will be calculated.
+#' * If `"Mean" %in% which_details`, then mean response rate and its MSE
+#'   will be calculated.
 #'
 #' @param design An object of class `fujikawa_x`.
 #' @inheritParams basksim::get_details.fujikawa
@@ -21,6 +32,12 @@ basksim::get_details
 #' weights? Default is `baskexact::weights_fujikawa`.
 #' @param weight_params A list of tuning parameters specific to `weight_fun`.
 #' By default, it takes the function arguments `epsilon`, `tau` and `logbase`.
+#' @param which_details A character vector specifying which details should be
+#' calculated. This is used only for `backend = "exact"`, where the number of
+#' details is relevant for runtime. Default is `"all"`, see details for
+#' explanation.
+#' @param verbose A logical, should message be shown if EWP or FWER is 0.
+#' Default is `TRUE`.
 #' @param ... Further arguments.
 #'
 #' @inherit basksim::get_details.fujikawa return
@@ -60,56 +77,118 @@ get_details.fujikawa_x <- function(design, ...,
                                    weight_fun = baskexact::weights_fujikawa,
                                    weight_params = list(epsilon = epsilon,
                                                         tau = tau,
-                                                        logbase = logbase)){
+                                                        logbase = logbase),
+                                   which_details = "all", verbose = TRUE){
   if(design$backend == "sim"){
     return(c(NextMethod(), backend = "sim"))
   } else if(design$backend == "exact"){
+    res <- NULL
     FWER <- numeric(0)
     EWP <- numeric(0)
     Rejection_Probabilities <- numeric(0)
-    if(all(p1 != design$p0)){
+    ECD <- numeric(0)
+    Mean <- numeric(0)
+    MSE <- numeric(0)
+    if(which_details == "all"){
+      which_details <- c("FWER", "EWP", "Rejection_Probabilities", "ECD",
+                         "Mean")
+    }
+    results_pow <- "ewp"
+    results_toer <- "fwer"
+    # Rejection probabilities can be calculated using the results = "group"
+    # argument with the toer() or pow() function.
+    if("Rejection_Probabilities" %in% which_details){
+      if("EWP" %in% which_details){
+        results_pow <- "group"
+      } else{
+        # We need to use either toer() or pow() to calculate per-basket
+        # rejection rates. If pow() is not called, we make sure that toer() is
+        # called.
+        which_details <- c(which_details, "FWER")
+        results_toer <- "group"
+      }
+    }
+    if(all(p1 != design$p0) & "EWP" %in% which_details){
       res <- baskexact::pow(design$design_exact, p1 = p1, n = n,
                             lambda = lambda, weight_fun = weight_fun,
-                            weight_params = weight_params, results = "group")
+                            weight_params = weight_params,
+                            results = results_pow)
       FWER <- 0
-      EWP <- res$ewp
-      Rejection_Probabilities <- res$rejection_probabilities
-      message("No true null hypotheses, hence the type 1 error rate is 0.")
-    } else if(all(p1 == design$p0)){
+      if(results_pow == "group"){
+        EWP <- res$ewp
+      } else{
+        EWP <- res
+      }
+      if(verbose){
+        message("No true null hypotheses, hence the type 1 error rate is 0.")
+      }
+    } else if(all(p1 == design$p0) & "FWER" %in% which_details){
       res <- baskexact::toer(design$design_exact, p1 = p1, n = n,
                              lambda = lambda, weight_fun = weight_fun,
-                             weight_params = weight_params, results = "group")
-      FWER <- res$fwer
+                             weight_params = weight_params,
+                             results = results_toer)
+      if(results_toer == "group"){
+        FWER <- res$fwer
+      } else{
+        FWER <- res
+      }
       EWP <- 0
-      Rejection_Probabilities <- res$rejection_probabilities
-      message("No true alternative hypotheses, hence the power is 0.")
+      if(verbose){
+        message("No true alternative hypotheses, hence the power is 0.")
+      }
     } else {
-      res <- baskexact::toer(design$design_exact, p1 = p1, n = n,
-                             lambda = lambda, weight_fun = weight_fun,
-                             weight_params = weight_params, results = "group")
-      res_ewp <- baskexact::pow(design$design_exact, p1 = p1, n = n,
-                             lambda = lambda, weight_fun = weight_fun,
-                             weight_params = weight_params, results = "ewp")
-      FWER <- res$fwer
-      EWP <- res_ewp
-      Rejection_Probabilities <- res$rejection_probabilities
-    }
-    res_estim <- baskexact::estim(design = design$design_exact, p1 = p1, n = n,
+      if("FWER" %in% which_details){
+        res_fwer <- baskexact::toer(design$design_exact, p1 = p1, n = n,
+                               lambda = lambda, weight_fun = weight_fun,
+                               weight_params = weight_params,
+                               results = results_toer)
+        if(results_toer == "group"){
+          FWER <- res_fwer$fwer
+          res <- res_fwer
+        } else{
+          FWER <- res_fwer
+        }
+      }
+      if("EWP" %in% which_details){
+        res_ewp <- baskexact::pow(design$design_exact, p1 = p1, n = n,
                                   lambda = lambda, weight_fun = weight_fun,
                                   weight_params = weight_params,
-                                  ...)
-    res_ecd <- baskexact::ecd(design = design$design_exact, p1 = p1, n = n,
-                              lambda = lambda, weight_fun = weight_fun,
-                              weight_params = weight_params, ...)
+                                  results = results_pow)
+        if(results_pow == "group"){
+          EWP <- res_ewp$ewp
+          if(is.null(res)){
+            res <- res_ewp
+          }
+        } else{
+          EWP <- res_ewp
+        }
+      }
+    }
+    if("Mean" %in% which_details){
+      res_estim <- baskexact::estim(design = design$design_exact, p1 = p1, n = n,
+                                    lambda = lambda, weight_fun = weight_fun,
+                                    weight_params = weight_params,
+                                    ...)
+      Mean <- res_estim$Mean
+      MSE <- res_estim$MSE
+    }
+    if("ECD" %in% which_details){
+      ECD <- baskexact::ecd(design = design$design_exact, p1 = p1, n = n,
+                            lambda = lambda, weight_fun = weight_fun,
+                            weight_params = weight_params, ...)
+    }
+    if("Rejection_Probabilities" %in% which_details){
+      Rejection_Probabilities <- res$Rejection_Probabilities
+    }
     return(list(
       Rejection_Probabilities = Rejection_Probabilities,
       FWER = FWER,
       EWP = EWP,
-      Mean = res_estim$Mean,
-      MSE = res_estim$MSE,
+      Mean = Mean,
+      MSE = MSE,
       Lower_CL = numeric(),
       Upper_CL = numeric(),
-      ECD = res_ecd,
+      ECD = ECD,
       p0 = design$p0,
       p1 = p1,
       backend = "exact"

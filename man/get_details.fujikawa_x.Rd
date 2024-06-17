@@ -17,7 +17,9 @@
   iter = 1000,
   data = NULL,
   weight_fun = baskexact::weights_fujikawa,
-  weight_params = list(epsilon = epsilon, tau = tau, logbase = logbase)
+  weight_params = list(epsilon = epsilon, tau = tau, logbase = logbase),
+  which_details = "all",
+  verbose = TRUE
 )
 }
 \arguments{
@@ -55,6 +57,14 @@ weights? Default is \code{baskexact::weights_fujikawa}.}
 
 \item{weight_params}{A list of tuning parameters specific to \code{weight_fun}.
 By default, it takes the function arguments \code{epsilon}, \code{tau} and \code{logbase}.}
+
+\item{which_details}{A character vector specifying which details should be
+calculated. This is used only for \code{backend = "exact"}, where the number of
+details is relevant for runtime. Default is \code{"all"}, see details for
+explanation.}
+
+\item{verbose}{A logical, should message be shown if EWP or FWER is 0.
+Default is \code{TRUE}.}
 }
 \value{
 A list containing the rejection probabilites, posterior means,
@@ -74,6 +84,20 @@ It calculates the details using backends from two different R packages:
 standard weight function \code{baskexact::weights_fujikawa} calculates the weights
 anew for each of the three function calls. This may compromise performance
 and can be fixed by manually calculating the weights beforehand.
+}
+
+For the \code{baskexact} backend, the number of details is a relevant factor for
+the function's runtime. Hence, one can select precisely which details should
+be calculated:
+\itemize{
+\item If \code{which_details == "all"}, everything will be calculated.
+\item If \code{"FWER" \%in\% which_details}, then FWER will be calculated.
+\item If \code{"EWP" \%in\% which_details}, then EWP will be calculated.
+\item If \code{"Rejection_Probabilities" \%in\% which_details}, then per-basket
+rejection probabilities will be calculated.
+\item If  \code{"ECD" \%in\% which_details}, then ECD will be calculated.
+\item If \code{"Mean" \%in\% which_details}, then mean response rate and its MSE
+will be calculated.
 }
 }
 \examples{
