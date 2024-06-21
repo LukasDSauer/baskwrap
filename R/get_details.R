@@ -89,16 +89,19 @@ get_details.fujikawa_x <- function(design, ...,
     ECD <- numeric(0)
     Mean <- numeric(0)
     MSE <- numeric(0)
-    if(which_details == "all"){
-      which_details <- c("FWER", "EWP", "Rejection_Probabilities", "ECD",
-                         "Mean")
+    if(length(which_details) == 1){
+      if(which_details == "all"){
+        which_details <- c("FWER", "EWP", "Rejection_Probabilities", "ECD",
+                           "Mean")
+      }
     }
     results_pow <- "ewp"
     results_toer <- "fwer"
     # Rejection probabilities can be calculated using the results = "group"
     # argument with the toer() or pow() function.
     if("Rejection_Probabilities" %in% which_details){
-      if("EWP" %in% which_details){
+      if("EWP" %in% which_details & (all(p1 != design$p0) |
+                                     !all(p1 == design$p0))){
         results_pow <- "group"
       } else{
         # We need to use either toer() or pow() to calculate per-basket
@@ -178,7 +181,12 @@ get_details.fujikawa_x <- function(design, ...,
                             weight_params = weight_params, ...)
     }
     if("Rejection_Probabilities" %in% which_details){
-      Rejection_Probabilities <- res$Rejection_Probabilities
+      if(!is.null(res$Rejection_Probabilities)){
+        Rejection_Probabilities <- res$Rejection_Probabilities
+      } else{
+        Rejection_Probabilities <- res$rejection_probabilities
+      }
+
     }
     return(list(
       Rejection_Probabilities = Rejection_Probabilities,
