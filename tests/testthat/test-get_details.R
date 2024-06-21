@@ -2,7 +2,6 @@ set.seed(169)
 k <- 3
 n <- 24
 p0 <- 0.2
-p1 <- c(0.2, 0.2, 0.2)
 shape1 <- 1
 shape2 <- 1
 lambda <- 0.99
@@ -17,6 +16,7 @@ design_sim <- setup_fujikawa_x(k = k, p0 = p0, shape1 = shape1,
 design_x <- setup_fujikawa_x(k = k, p0 = p0, shape1 = shape1,
                              shape2 = shape2, backend = "exact")
 test_that("results coincide with published results by Fujikawa et al.", {
+  p1 <- c(0.2, 0.2, 0.2)
   details_sim_i <- get_details(design = design_sim, n = n, p1 = p1,
                                lambda = lambda, epsilon = epsilon, tau = tau_i,
                                logbase = logbase,
@@ -51,11 +51,21 @@ test_that("results coincide with published results by Fujikawa et al.", {
   expect_equal(details_x_ii$Rejection_Probabilities, rej_fuj_ii, tolerance = 0.05)
   expect_equal(details_x_ii$FWER, fwer_fuj_ii, tolerance = 0.05)
 })
-test_that("results coincide with published results by Fujikawa et al.", {
+test_that("code returns message if the power is 0 per definition", {
+  p1 <- c(0.2, 0.2, 0.2)
   expect_message(get_details(design = design_x, n = n, p1 = p1,
                              lambda = lambda,
                              epsilon = epsilon, tau = tau_i, logbase = logbase,
                              iter = NULL,
                              verbose = TRUE),
                  "No true alternative hypotheses, hence the power is 0.")
+})
+test_that("code returns message if the toer is 0 per definition", {
+  p1 <- c(0.5, 0.5, 0.5)
+  expect_message(get_details(design = design_x, n = n, p1 = p1,
+                             lambda = lambda,
+                             epsilon = epsilon, tau = tau_i, logbase = logbase,
+                             iter = NULL,
+                             verbose = TRUE),
+                 "No true null hypotheses, hence the type 1 error rate is 0.")
 })

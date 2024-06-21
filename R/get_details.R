@@ -95,15 +95,27 @@ get_details.fujikawa_x <- function(design, ...,
                            "Mean")
       }
     }
+
+    # Are TOER and the power equal to 0 by definition?
+    toer_eq_0 <- all(p1 != design$p0)
+    pow_eq_0 <- all(p1 == design$p0)
+    # Should I only calculate EWP and FWER or also rejection probabilities per
+    # basket?
+    # Rejection probabilities can be calculated using the results = "group"
+    # argument with the toer() resp. the pow() function. This doesn't work though
+    # if toer_eq_0 resp. pow_eq_0 are TRUE.
     results_pow <- "ewp"
     results_toer <- "fwer"
-    # Rejection probabilities can be calculated using the results = "group"
-    # argument with the toer() or pow() function.
     if("Rejection_Probabilities" %in% which_details){
-      if("EWP" %in% which_details & (all(p1 != design$p0) |
-                                     !all(p1 == design$p0))){
+      if(toer_eq_0){
         results_pow <- "group"
-      } else{
+      } else if(pow_eq_0){
+        results_toer <- "group"
+      } else if("EWP" %in% which_details){
+        results_pow <- "group"
+      } else if("FWER" %in% which_details){
+        results_toer <- "group"
+      } else {
         # We need to use either toer() or pow() to calculate per-basket
         # rejection rates. If pow() is not called, we make sure that toer() is
         # called.
