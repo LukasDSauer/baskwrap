@@ -108,8 +108,10 @@ get_details.fujikawa_x <- function(design, ...,
     results_toer <- "fwer"
     if("Rejection_Probabilities" %in% which_details){
       if(toer_eq_0){
+        which_details <- c(which_details, "EWP")
         results_pow <- "group"
       } else if(pow_eq_0){
+        which_details <- c(which_details, "FWER")
         results_toer <- "group"
       } else if("EWP" %in% which_details){
         results_pow <- "group"
@@ -123,7 +125,7 @@ get_details.fujikawa_x <- function(design, ...,
         results_toer <- "group"
       }
     }
-    if(all(p1 != design$p0) & "EWP" %in% which_details){
+    if(toer_eq_0 & "EWP" %in% which_details){
       res <- baskexact::pow(design$design_exact, p1 = p1, n = n,
                             lambda = lambda, weight_fun = weight_fun,
                             weight_params = weight_params,
@@ -137,7 +139,7 @@ get_details.fujikawa_x <- function(design, ...,
       if(verbose){
         message("No true null hypotheses, hence the type 1 error rate is 0.")
       }
-    } else if(all(p1 == design$p0) & "FWER" %in% which_details){
+    } else if(pow_eq_0 & "FWER" %in% which_details){
       res <- baskexact::toer(design$design_exact, p1 = p1, n = n,
                              lambda = lambda, weight_fun = weight_fun,
                              weight_params = weight_params,
