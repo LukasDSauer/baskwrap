@@ -97,8 +97,15 @@ get_details.fujikawa_x <- function(design, ...,
     }
 
     # Are TOER and the power equal to 0 by definition?
-    toer_eq_0 <- all(p1 != design$p0)
-    pow_eq_0 <- all(p1 == design$p0)
+    toer_eq_0 <- all(p1 != design$p0) & !is.null(p1)
+    pow_eq_0 <- all(p1 == design$p0) # If p1 == NULL --> tautologically TRUE.
+    # If TOER is equal 0, can't calculate TOER, and respectively for power.
+    if(toer_eq_0){
+      which_details <- which_details[! which_details %in% "FWER"]
+    }
+    if(pow_eq_0){
+      which_details <- which_details[! which_details %in% "EWP"]
+    }
     # Should I only calculate EWP and FWER or also rejection probabilities per
     # basket?
     # Rejection probabilities can be calculated using the results = "group"
