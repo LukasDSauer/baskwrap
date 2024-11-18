@@ -80,7 +80,11 @@ get_details.fujikawa_x <- function(design, ...,
                                                         logbase = logbase),
                                    which_details = "all", verbose = TRUE){
   if(design$backend == "sim"){
-    return(c(NextMethod(), backend = "sim"))
+    return(c(NextMethod(),
+             list(
+               p0 = design$p0,
+               p1 = p1,
+               backend = "sim")))
   } else if(design$backend == "exact"){
     res <- NULL
     FWER <- numeric(0)
