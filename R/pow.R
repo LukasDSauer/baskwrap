@@ -7,6 +7,8 @@
 #' @param design An object created with one of the `setup` functions from
 #' the `basksim` package.
 #' @inheritParams basksim::toer
+#' @param p1 Probabilities under the alternative hypothesis. If
+#' `length(p1) == 1`, then this is a common probability for all baskets.
 #'
 #' @inherit basksim::toer return
 #' @export
