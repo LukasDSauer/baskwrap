@@ -1,18 +1,22 @@
 from math import exp, log
 import numpy as np
 from scipy.special import rel_entr
-from scipy.stats import beta
+from scipy.stats import beta, binom
+from itertools import product
+#from tqdm.contrib.itertools import product
+from tqdm import tqdm
 import scipy.integrate as integrate
 # Parameters
 k = 3
 shape1 = 1
 shape2 = 1
 p0 = 0.2
-n = 24
+p1 = np.array([0.2, 0.5, 0.5])
+n = 20
 r = np.array([5, 9, 10])
-epsilon = 1.25
+epsilon = 2
 tau = 0.5
-lambda_par = 0.99
+lambda_par = 0.95
 logbase = 2
 
 # Objects of Fujikawa's design
@@ -64,30 +68,49 @@ def posterior_prob(r):
   for i in range(0, k):
     a_borrow = sum(weights_fujikawa[i,]*(shape1 + r))
     b_borrow = sum(weights_fujikawa[i,]*(shape2 + n - r))
-    print("a_borrow")
-    print(a_borrow)
-    print("b_borrow")
-    print(b_borrow)
     pp[i] = integrate.quad(lambda x: beta.pdf(x, a = a_borrow, b = b_borrow),
                                p0, 1)[0]
   return pp
+
 # Rejection probabilities
-def rejection_prob(lambda_par):
-  rp = np.zeros(shape = k)
-  outcomes = np.zeros(shape = (n**k, k))
-  for i in range(0, n**k):
-    for j in range(0, k):
-      vec_add = np.zeros(shape = (1,k))
-      vec_add[0, j] = 1
-      print(vec_add)
-      # Outcomes is a home-made cartesian product
-      outcomes[i,] = outcomes[i-1,] + vec_add
-  # Calculate posterior_prob() and np.binom.pmf()
+# def rejection_prob(lambda_par, p0, p1):
+  # rp = np.zeros(shape = k)
+fwer = float('nan')
+ewp = float('nan')
+h0_true = (p0 == p1)
+get_fwer = not all(np.logical_not(h0_true))
+get_ewp = not all(h0_true)
+if get_fwer:
+  fwer = 0
+if get_ewp:
+  ewp = 0
+responses = list(product(np.arange(start = 0, stop = n + 1), repeat = k))
+prod_sampling_prob = list(map(np.prod,
+                         list(map(lambda r: binom.pmf(np.array(r), n = n, p = p1),
+                             responses))))
+reject = list(map(lambda r: posterior_prob(np.array(r)) > lambda_par,
+             responses))
+rp = sum(map(lambda rej, psp: rej*psp,
+             reject, prod_sampling_prob))
+  # for r in tqdm(product(np.arange(start = 0, stop = n + 1), repeat = k),
+  #               total = (n+1)**k):
+  #   sampling_prob = binom.pmf(np.array(r), n = n, p = p1)
+  #   prod_sampling_prob = np.prod(sampling_prob)
+  #   reject = (posterior_prob(np.array(r)) > lambda_par)
+  #   rp = rp + reject*prod_sampling_prob
+  #   if get_fwer:
+  #     fwer = fwer + sum(h0_true*reject*prod_sampling_prob)
+  #   if get_ewp:
+  #     ewp = ewp + sum(np.logical_not(h0_true)*reject*prod_sampling_prob)
+  # return {'rejection_probabilities': rp,
+  #         'ewp': ewp,
+  #         'fwer': fwer
+  #         }
 
 # Return - I want to return this to R using reticulate
 print("weights_fujikawa")
 print(weights_fujikawa)
 print("posterior_prob")
 print(posterior_prob(r))
-print("cartesian_prod")
-print(outcomes)
+# rp = rejection_prob(lambda_par = lambda_par, p0 = p0, p1 = p1)
+print(rp)
