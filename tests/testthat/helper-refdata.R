@@ -7,7 +7,7 @@ shape2_py <- 1
 p0_py <- 0.2
 p1_py <- c(0.2, 0.5, 0.5)
 n_py <- 15
-r_py <- c(5, 9, 10)
+r_py <- c(2, 9, 10)
 epsilon_py <- 2
 tau_py <- 0.5
 lambda_py <-  0.95

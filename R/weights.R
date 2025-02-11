@@ -20,22 +20,24 @@
 #' weight_mat <- weights_fujikawa_vanilla(design, n = 20, logbase = 2)
 #' weight_mat_tuned <- weights_fujikawa_tuned(weight_mat, epsilon = 1.25,
 #'                                            tau = 0.5)
-weights_fujikawa <- function(design, n, logbase, epsilon, tau, ...){
+weights_fujikawa_x <- function(design, n, logbase, epsilon, tau, ...){
   if(is.null(design$design_exact)){
     design <- set_design_exact(design)
   }
-  unclass(baskexact::weights_fujikawa(design = design$design_exact, n = n,
-                                     lambda = NULL,
-                                     epsilon = 1, tau = 0,
-                                     logbase = logbase, ...))
+  unclass(baskexact::weights_fujikawa(design = design$design_exact,
+                                      n = n,
+                                      lambda = NULL,
+                                      epsilon = epsilon,
+                                      tau = tau,
+                                      logbase = logbase, ...))
 }
 #' @export
-#' @rdname weights_fujikawa
+#' @rdname weights_fujikawa_x
 weights_fujikawa_vanilla <- function(design, n, logbase, ...){
-  return(weights_fujikawa(design, n, logbase, epsilon = 1, tau = 0, ...))
+  return(weights_fujikawa_x(design, n, logbase, epsilon = 1, tau = 0, ...))
 }
 #' @export
-#' @rdname weights_fujikawa
+#' @rdname weights_fujikawa_x
 weights_fujikawa_tuned <- function(weight_mat, epsilon = 1.25,
                                    tau = 0.5, ...){
   weight_mat <- weight_mat^epsilon

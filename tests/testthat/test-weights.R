@@ -13,12 +13,12 @@ test_that("weights_fujikawa_vanilla and *_tuned deliver the same results as
   expect_equal(weight_mat_tuned, ref_tuned)
 })
 
-test_that("weights_fujikawa delivers the same results as python", {
-  weights_fuj <- weights_fujikawa(design = design_py,
-                                  n = n_py,
-                                  epsilon = epsilon_py,
-                                  tau = tau_py,
-                                  logbase = logbase_py)
+test_that("weights_fujikawa_x delivers the same results as python", {
+  weights_fuj <- weights_fujikawa_x(design = design_py,
+                                    n = n_py,
+                                    epsilon = epsilon_py,
+                                    tau = tau_py,
+                                    logbase = logbase_py)
   ref_py <- readRDS(here(path_refdata, "ref_weights_py.RDS"))
   expect_equal(weights_fuj, ref_py)
 })
