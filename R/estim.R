@@ -24,7 +24,7 @@
 estim <- function(design, ...) {
   UseMethod("estim", design)
 }
-#' @rdname pow
+#' @rdname estim
 #' @export
 estim.default <- function(design, n, p1 = NULL, lambda, design_params = list(),
                           iter = 1000, data = NULL, ...) {

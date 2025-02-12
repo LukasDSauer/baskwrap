@@ -69,3 +69,27 @@ test_that("code returns message if the toer is 0 per definition", {
                              verbose = TRUE),
                  "No true null hypotheses, hence the type 1 error rate is 0.")
 })
+test_that("get_details() results coincide with python", {
+  res <- get_details(design = design_py,
+                     n = n_py,
+                     p1 = p1_py,
+                     lambda = lambda_py,
+                     epsilon = epsilon_py,
+                     tau = tau_py,
+                     logbase = logbase_py,
+                     iter = NULL,
+                     verbose = TRUE)
+  ref_py <- readRDS(here::here(path_refdata, "ref_details_py.RDS"))
+  expect_equal(res$FWER, ref_py$fwer,
+               ignore_attr = TRUE, tolerance = 1e-7)
+  expect_equal(res$EWP, ref_py$ewp,
+               ignore_attr = TRUE)
+  expect_equal(res$ECD, ref_py$ecd,
+               ignore_attr = TRUE)
+  expect_equal(res$Rejection_Probabilities, ref_py$rejection_probabilities,
+               ignore_attr = TRUE)
+  expect_equal(res$Mean, ref_py$mean,
+               ignore_attr = TRUE)
+  expect_equal(res$MSE, ref_py$mse,
+               ignore_attr = TRUE)
+})

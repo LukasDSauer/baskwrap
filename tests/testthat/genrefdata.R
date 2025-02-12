@@ -5,6 +5,7 @@ library(here)
 library(reticulate)
 library(baskexact)
 use_virtualenv()
+devtools::load_all()
 source(here(testthat::test_path(), "helper-refdata.R"))
 # PARAMETERS
 design_be <- baskexact::setupOneStageBasket(k = 3, p0 = 0.2)
@@ -23,7 +24,7 @@ weights_tuned <- baskexact::weights_fujikawa(design = design_be,
                                          epsilon = 2.5,
                                          tau = 0.2)
 saveRDS(weights_tuned, here(path_refdata, "ref_weights_fujikawa_tuned.RDS"))
-# - Weights generated with Python
+# # - Weights generated with Python
 source_python(here(path_refdata, "genrefdata.py"))
 weights_py <- get_weights_fujikawa_py(n = n_py,
                                       shape1 = shape1_py,
@@ -37,14 +38,10 @@ pp_py <- get_posterior_prob_py(r = np_array(r_py, dtype = "int64"),
                                weight_mat = weights_py)
 saveRDS(pp_py, here(path_refdata, "ref_pp_py.RDS"))
 # - Rejection probabilities generated with Python
-rp_py <- get_rejection_prob_py(lambda_par = lambda_py,
-                               p0 = p0_py,
-                               p1 = p1_py,
+details_py <- get_details_py(lambda_par = lambda_py,
+                               p0 = np_array(p0_py, dtype = "float32"),
+                               p1 = np_array(p1_py, dtype = "float32"),
                                weight_mat = weights_py)
-saveRDS(rp_py, here(path_refdata, "ref_rp_py.RDS"))
-# Comparing test results with Python
-# basket_test <-
-# get_details(design = design_x, n = n, p1 = p1, lambda = lambda_par,
-#             epsilon = epsilon, tau = tau, weight_fun = baskexact::weights_fujikawa,
-#             logbase = logbase)
-#saveRDS()
+saveRDS(details_py, here(path_refdata, "ref_details_py.RDS"))
+# - Save session info
+saveRDS(sessionInfo(), here(path_refdata, "genrefdata_session_info.RDS"))

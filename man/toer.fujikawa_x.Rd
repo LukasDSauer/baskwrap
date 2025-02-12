@@ -9,11 +9,14 @@
   n,
   p1 = NULL,
   lambda,
-  design_params = list(),
+  epsilon = epsilon,
+  tau = tau,
+  logbase = logbase,
+  design_params = list(epsilon = epsilon, tau = tau, logbase = logbase),
   iter = 1000,
   data = NULL,
-  weight_fun,
-  weight_params = list(),
+  weight_fun = baskexact::weights_fujikawa,
+  weight_params = design_params,
   globalweight_fun = NULL,
   globalweight_params = list(),
   results = c("fwer", "group"),
@@ -29,6 +32,15 @@
 then all probabilities are set to p0.}
 
 \item{lambda}{The posterior probability threshold.}
+
+\item{epsilon}{Tuning parameter that determines the amount of borrowing.
+See \code{\link[basksim]{setup_fujikawa}}).}
+
+\item{tau}{Tuning parameter that determines how similar the baskets
+have to be that information is shared. See \code{\link[basksim]{setup_fujikawa}}).}
+
+\item{logbase}{Tuning parameter. The base of the logarithm that is used to
+calculate the Jensen-Shannon divergence.}
 
 \item{design_params}{A list of params that is specific to the class of
 \code{design}.}
