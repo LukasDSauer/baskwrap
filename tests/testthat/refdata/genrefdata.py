@@ -2,11 +2,9 @@ from math import exp, log
 import numpy as np
 from scipy.stats import beta, binom
 from itertools import product
-# from tqdm.contrib.itertools import product
-# from tqdm import tqdm
 import scipy.integrate as integrate
 
-
+# Weights
 def get_weights_fujikawa_py(n, shape1, shape2, epsilon, tau, logbase):
   n = int(n)
   # Objects of Fujikawa's design
@@ -44,7 +42,10 @@ def get_weights_fujikawa_py(n, shape1, shape2, epsilon, tau, logbase):
   return weights_fujikawa
         
 # Posterior probabilities
-def get_posterior_prob_py(r, weight_mat):
+def get_posterior_prob_py(n, k, shape1, shape2, p0,
+                          r, weight_mat):
+  n = int(n)
+  k = int(k)
   pp = np.zeros(shape = k)
   for i in range(0, k):
     a_borrow = sum(weight_mat[r[i],r]*(shape1 + r))
@@ -54,7 +55,9 @@ def get_posterior_prob_py(r, weight_mat):
   return pp
 
 # Posterior mean
-def get_posterior_mean_py(r, weight_mat):
+def get_posterior_mean_py(n, k, shape1, shape2, r, weight_mat):
+  n = int(n)
+  k = int(k)
   mean = np.zeros(shape = k)
   for i in range(0, k):
     a_borrow = sum(weight_mat[r[i],r]*(shape1 + r))
@@ -63,19 +66,10 @@ def get_posterior_mean_py(r, weight_mat):
                              0, 1)[0]
   return mean
 
-# Posterior squared error
-def get_posterior_se_py(r, p1, weight_mat):
-  mse = np.zeros(shape = k)
-  for i in range(0, k):
-    a_borrow = sum(weight_mat[r[i],r]*(shape1 + r))
-    b_borrow = sum(weight_mat[r[i],r]*(shape2 + n - r))
-    mse[i] = integrate.quad(lambda x: (p1[i] - x)**2*
-                                        beta.pdf(x, a = a_borrow, b = b_borrow),
-                            0, 1)[0]
-  return mse
-
 # Rejection probabilities
-def get_details_py(lambda_par, p0, p1, weight_mat):
+def get_details_py(n, k, shape1, shape2, lambda_par, p0, p1, weight_mat):
+  n = int(n)
+  k = int(k)
   fwer = float('nan')
   ewp = float('nan')
   h0_true = (p0 == p1)
@@ -90,9 +84,11 @@ def get_details_py(lambda_par, p0, p1, weight_mat):
   prod_sampling_prob = list(map(np.prod,
                            list(map(lambda r: binom.pmf(np.array(r), n = n, p = p1),
                                responses))))
-  pps = list(map(lambda r: get_posterior_prob_py(np.array(r), weight_mat), 
+  pps = list(map(lambda r: get_posterior_prob_py(n, k, shape1, shape2, p0,
+                                                 np.array(r), weight_mat), 
                  responses))
-  pmean_list = list(map(lambda r: get_posterior_mean_py(np.array(r),
+  pmean_list = list(map(lambda r: get_posterior_mean_py(n, k, shape1, shape2, 
+                                                        np.array(r),
                                                         weight_mat), responses))
   mean = sum(map(lambda pmean, psp: pmean*psp, 
                  pmean_list, prod_sampling_prob))
