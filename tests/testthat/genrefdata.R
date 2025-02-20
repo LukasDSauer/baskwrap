@@ -7,6 +7,7 @@ library(baskexact)
 use_virtualenv()
 devtools::load_all()
 source(here(testthat::test_path(), "helper-refdata.R"))
+
 # PARAMETERS
 design_be <- baskexact::setupOneStageBasket(k = 3, p0 = 0.2)
 

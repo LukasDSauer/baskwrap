@@ -1,5 +1,5 @@
 # GENERAL PARAMETERS
-path_refdata <- paste0(testthat::test_path(), "/refdata")
+path_refdata <- list("tests", "testthat", "refdata")
 # PARAMETERS USED IN ALL PYTHON-GENERATED EXAMPLES
 k_py <- 4
 shape1_py <- 1
