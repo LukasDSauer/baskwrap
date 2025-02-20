@@ -6,8 +6,10 @@ test_that("weights_fujikawa_vanilla and *_tuned deliver the same results as
   weight_mat_tuned <- weights_fujikawa_tuned(weight_mat_vanilla, epsilon = 2.5,
                                              tau = 0.2)
   # Loading reference data
-  ref_vanilla <- readRDS(here(path_refdata, "ref_weights_fujikawa_vanilla.RDS"))
-  ref_tuned <- readRDS(here(path_refdata, "ref_weights_fujikawa_tuned.RDS"))
+  ref_vanilla <- readRDS(here::here(path_refdata,
+                                    "ref_weights_fujikawa_vanilla.RDS"))
+  ref_tuned <- readRDS(here::here(path_refdata,
+                                  "ref_weights_fujikawa_tuned.RDS"))
   # Comparison
   expect_equal(weight_mat_vanilla, ref_vanilla)
   expect_equal(weight_mat_tuned, ref_tuned)
@@ -19,6 +21,6 @@ test_that("weights_fujikawa_x delivers the same results as python", {
                                     epsilon = epsilon_py,
                                     tau = tau_py,
                                     logbase = logbase_py)
-  ref_py <- readRDS(here(path_refdata, "ref_weights_py.RDS"))
+  ref_py <- readRDS(here::here(path_refdata, "ref_weights_py.RDS"))
   expect_equal(weights_fuj, ref_py)
 })

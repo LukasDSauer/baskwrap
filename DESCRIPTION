@@ -19,5 +19,6 @@ Remotes:
 URL: https://github.com/LukasDSauer/baskwrap
 BugReports: https://github.com/LukasDSauer/baskwrap/issues
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    here
 Config/testthat/edition: 3
