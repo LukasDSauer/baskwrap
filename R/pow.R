@@ -11,13 +11,8 @@
 #' `length(p1) == 1`, then this is a common probability for all baskets.
 #'
 #' @inherit basksim::toer return
+#' @inherit pow.fujikawa_x examples
 #' @export
-#'
-#' @examples
-#' # Example for a basket trial with Fujikawa's Design
-#' design <- setup_fujikawa_x(k = 3, p0 = 0.2)
-#' pow(design = design, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
-#'      design_params = list(epsilon = 2, tau = 0), iter = 100)
 pow <- function(design, ...) {
   UseMethod("pow", design)
 }

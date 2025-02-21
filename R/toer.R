@@ -10,11 +10,7 @@
 #' @inherit basksim::toer return
 #' @export
 #'
-#' @examples
-#' # Example for a basket trial with Fujikawa's Design
-#' design <- setup_fujikawa_x(k = 3, p0 = 0.2)
-#' toer(design = design, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
-#'      design_params = list(epsilon = 2, tau = 0), iter = 100)
+#' @inherit toer.fujikawa_x examples
 toer <- function(design, ...) {
   UseMethod("toer", design)
 }
