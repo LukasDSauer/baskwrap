@@ -50,7 +50,6 @@ design. It defaults to the function \code{pow.default} which works similarly to
 \code{basksim::toer} and does not rely on any \code{baskwrap}-specific function.
 }
 \examples{
-# Example for a basket trial with Fujikawa's Design
 design <- setup_fujikawa_x(k = 3, p0 = 0.2)
 pow(design = design, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
      design_params = list(epsilon = 2, tau = 0), iter = 100)

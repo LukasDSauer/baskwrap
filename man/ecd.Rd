@@ -23,7 +23,6 @@ Generic function for calculating the expected number of correct decisions
 of a basket trial design. It defaults to the function \code{basksim::ecd}.
 }
 \examples{
-# Example for a basket trial with Fujikawa's Design
 design <- setup_fujikawa_x(k = 3, p0 = 0.2)
 ecd(design = design, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
      design_params = list(epsilon = 2, tau = 0), iter = 100)

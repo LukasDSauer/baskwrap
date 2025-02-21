@@ -8,16 +8,7 @@
 \usage{
 estim(design, ...)
 
-\method{estim}{default}(
-  design,
-  n,
-  p1 = NULL,
-  lambda,
-  design_params = list(),
-  iter = 1000,
-  data = NULL,
-  ...
-)
+\method{estim}{default}(design, ...)
 
 \method{estim}{fujikawa_x}(
   design,
@@ -48,15 +39,8 @@ the \code{basksim} package.}
 
 \item{lambda}{The posterior probability threshold.}
 
-\item{design_params}{A list of params that is specific to the class of
-\code{design}.}
-
 \item{iter}{The number of iterations in the simulation. Is ignored if
 \code{data} is specified.}
-
-\item{data}{A data matrix with k column with the number of responses for each
-basket. Has to be generated with \code{get_data}. If \code{data} is used,
-then \code{iter} is ignored.}
 }
 \value{
 A list containing means of the posterior distribution and

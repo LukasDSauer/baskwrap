@@ -10,3 +10,34 @@ test_that("pow() results coincide with python", {
   expect_equal(res, ref_py$ewp,
                ignore_attr = TRUE)
 })
+test_that("MC simulated pow() results are close to exact results", {
+  set.seed(3465)
+  res <- pow(design = design_sim,
+             n = n_sim,
+             p1 = p1_sim,
+             lambda = lambda_sim,
+             epsilon = epsilon_sim,
+             tau = tau_sim,
+             logbase = logbase_sim,
+             iter = iter_sim)
+  res_x <- pow(design = set_backend(design_sim, "exact"),
+               n = n_sim,
+               p1 = p1_sim,
+               lambda = lambda_sim,
+               epsilon = epsilon_sim,
+               tau = tau_sim,
+               logbase = logbase_sim)
+  expect_equal(res, res_x,
+               tolerance = 0.01
+  )
+})
+test_that("wrong backend causes an error in pow()", {
+  expect_error(pow(design = design_typo,
+                   n = n_sim,
+                   p1 = p1_sim,
+                   lambda = lambda_sim,
+                   epsilon = epsilon_sim,
+                   tau = tau_sim,
+                   logbase = logbase_sim,
+                   iter = iter_sim))
+})
