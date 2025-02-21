@@ -8,9 +8,8 @@
 #' @inheritParams basksim::ecd
 #'
 #' @inherit basksim::ecd return
-#' @export
-#'
 #' @inherit ecd.fujikawa_x examples
+#' @export
 ecd <- function(design, ...) {
   UseMethod("ecd", design)
 }

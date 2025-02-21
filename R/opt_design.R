@@ -9,14 +9,7 @@
 #'
 #' @inherit basksim::opt_design return
 #' @export
-#'
-#' @examples
-#' # Example for a basket trial with Fujikawa's Design
-#' design <- setup_fujikawa_x(k = 3, p0 = 0.2)
-#' opt_design(design, n = 20, alpha = 0.05,
-#'            design_params = list(epsilon = c(1, 2), tau = c(0, 0.5)),
-#'            scenarios = scenarios,
-#'            prec_digits = 3)
+#' @inherit opt_design.fujikawa_x examples
 opt_design <- function(design, ...) {
   UseMethod("opt_design", design)
 }

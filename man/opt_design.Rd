@@ -23,10 +23,10 @@ Functions for optimizing the tuning parameters of a basket trial
 design. This defaults to the function \code{basksim::opt_design}.
 }
 \examples{
-# Example for a basket trial with Fujikawa's Design
 design <- setup_fujikawa_x(k = 3, p0 = 0.2)
-opt_design(design, n = 20, alpha = 0.05,
+opt_design(design = design,
+           n = 20, alpha = 0.05,
            design_params = list(epsilon = c(1, 2), tau = c(0, 0.5)),
-           scenarios = scenarios,
+           scenarios = get_scenarios(design, 0.5),
            prec_digits = 3)
 }
