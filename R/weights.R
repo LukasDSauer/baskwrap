@@ -24,12 +24,12 @@ weights_fujikawa_x <- function(design, n, logbase, epsilon, tau, ...){
   if(is.null(design$design_exact)){
     design <- set_design_exact(design)
   }
-  unclass(baskexact::weights_fujikawa(design = design$design_exact,
-                                      n = n,
-                                      lambda = NULL,
-                                      epsilon = epsilon,
-                                      tau = tau,
-                                      logbase = logbase, ...))
+  baskexact::weights_fujikawa(design = design$design_exact,
+                              n = n,
+                              lambda = NULL,
+                              epsilon = epsilon,
+                              tau = tau,
+                              logbase = logbase, ...)
 }
 #' @export
 #' @rdname weights_fujikawa_x
