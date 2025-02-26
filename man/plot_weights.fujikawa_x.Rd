@@ -4,7 +4,13 @@
 \alias{plot_weights.fujikawa_x}
 \title{Plot Weight Functions of Fujikawa et al.'s Basket Trial Design}
 \usage{
-plot_weights.fujikawa_x(design, n, r1, weight_fun, weight_params = list())
+\method{plot_weights}{fujikawa_x}(
+  design,
+  n,
+  r1,
+  weight_fun = baskexact::weights_fujikawa,
+  weight_params = list()
+)
 }
 \arguments{
 \item{design}{An object of class \code{Basket} created by
@@ -26,5 +32,6 @@ the weight functions defined for Fujikawa et al.'s design.
 }
 \examples{
 design_x <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "exact")
-plot_weights(design = design_x, n = 20, r1 = c(2, 7, 19))
+plot_weights(design = design_x, n = 20, r1 = 11,
+             weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2)))
 }

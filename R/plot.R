@@ -5,8 +5,8 @@
 #'
 #' @inheritParams pow
 #' @inherit plot_weights.fujikawa_x examples
-basket_test <- function(design, ...) {
-  UseMethod("basket_test", design)
+plot_weights <- function(design, ...) {
+  UseMethod("plot_weights", design)
 }
 #' Plot Weight Functions of Fujikawa et al.'s Basket Trial Design
 #'
@@ -18,8 +18,12 @@ basket_test <- function(design, ...) {
 #'
 #' @examples
 #' design_x <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "exact")
-#' plot_weights(design = design_x, n = 20, r1 = c(2, 7, 19))
-plot_weights.fujikawa_x <- function(design, n, r1, weight_fun,
+#' plot_weights(design = design_x, n = 20, r1 = 11,
+#'              weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2)))
+plot_weights.fujikawa_x <- function(design,
+                                    n,
+                                    r1,
+                                    weight_fun = baskexact::weights_fujikawa,
                                     weight_params = list()) {
   if(is.null(design$design_exact)){
     design <- set_design_exact(design)

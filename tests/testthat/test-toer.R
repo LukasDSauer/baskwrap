@@ -20,7 +20,7 @@ test_that("MC simulated toer() results are close to exact results", {
               epsilon = epsilon_sim,
               tau = tau_sim,
               logbase = logbase_sim,
-              iter = iter_sim)
+              iter = 10000)
   res_x <- toer(design = set_backend(design_sim, "exact"),
               n = n_sim,
               p1 = p1_sim,
@@ -28,9 +28,9 @@ test_that("MC simulated toer() results are close to exact results", {
               epsilon = epsilon_sim,
               tau = tau_sim,
               logbase = logbase_sim)
-  expect_true(res - res_x > 0.0001)
+  expect_true(abs(res - res_x) > 0.0001)
   expect_equal(res, res_x,
-               tolerance = 0.05
+               tolerance = 0.009
                )
 })
 test_that("wrong backend causes an error in toer()", {
