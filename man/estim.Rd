@@ -2,10 +2,13 @@
 % Please edit documentation in R/estim.R
 \name{estim}
 \alias{estim}
+\alias{estim.default}
 \alias{estim.fujikawa_x}
 \title{Calculate the Posterior Mean and Mean Squared Error for a Basket Trial Design}
 \usage{
 estim(design, ...)
+
+\method{estim}{default}(design, ...)
 
 \method{estim}{fujikawa_x}(
   design,

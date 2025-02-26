@@ -1,0 +1,53 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# baskwrap
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+The baskwrap package supplies a unified wrapper to several basket trial packages (`basksim` and `baskexact`) using a unified syntax.
+
+## Installation
+
+You can install the development version of baskwrap from [GitHub](https://github.com/LukasDSauer/baskwrap) with:
+
+``` r
+# install.packages("pak")
+pak::pak("LukasDSauer/baskwrap")
+```
+
+## Example
+
+The baskwrap package provides a simple interface to switch between two methods for calculating basket trial characteristics, numerical integration ("exact") and Monte Carlo simulation ("simulated").
+
+```{r example}
+library(baskwrap)
+# INPUT PARAMETERS
+n <- 20
+p1 <- c(0.2, 0.5, 0.5)
+lambda <- 0.95
+epsilon <- 2
+tau <- 0.5
+design <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "exact")
+# DETAILS USING EXACT BACKEND
+get_details(design = design, n = n, p1 = p1, lambda = lambda,
+            epsilon = epsilon, tau = tau)
+# DETAILS USING MC BACKEND
+get_details(design = set_backend(design, "sim"),
+            n = n, p1 = p1, lambda = lambda,
+            epsilon = epsilon, tau = tau)
+```

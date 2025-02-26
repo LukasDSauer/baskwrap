@@ -97,7 +97,9 @@ be calculated:
 rejection probabilities will be calculated.
 \item If  \code{"ECD" \%in\% which_details}, then ECD will be calculated.
 \item If \code{"Mean" \%in\% which_details}, then mean response rate and its MSE
-will be calculated.
+will be calculated. The mean is the expected posterior mean conditional
+under the assumption that \code{p1} is true, and the MSE is the expected squared
+deviation of the posterior mean from this true value.
 }
 }
 \examples{

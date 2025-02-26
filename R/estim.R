@@ -24,13 +24,10 @@
 estim <- function(design, ...) {
   UseMethod("estim", design)
 }
-#' @rdname pow
+#' @rdname estim
 #' @export
-estim.default <- function(design, n, p1 = NULL, lambda, design_params = list(),
-                          iter = 1000, data = NULL, ...) {
-  res <- get_details(design = design, n = n, p1 = p1, lambda = lambda,
-                     epsilon = epsilon, tau = tau,
-                     logbase = logbase, iter = iter)
+estim.default <- function(design, ...) {
+  res <- get_details(design = design, ...)
   return(list(
     Mean = res$Mean,
     MSE = res$MSE))
