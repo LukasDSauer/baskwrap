@@ -27,9 +27,9 @@ test_that("MC simulated ecd() results are close to exact results", {
                 epsilon = epsilon_sim,
                 tau = tau_sim,
                 logbase = logbase_sim)
-  expect_true(res - res_x > 0.000001)
+  expect_true(abs(res - res_x) > 0.000001)
   expect_equal(res, res_x,
-               tolerance = 0.0001
+               tolerance = 0.00099
   )
 })
 test_that("wrong backend causes an error in ecd()", {

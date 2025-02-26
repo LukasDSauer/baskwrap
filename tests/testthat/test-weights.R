@@ -22,5 +22,5 @@ test_that("weights_fujikawa_x delivers the same results as python", {
                                     tau = tau_py,
                                     logbase = logbase_py)
   ref_py <- readRDS(here::here(path_refdata, "ref_weights_py.RDS"))
-  expect_equal(weights_fuj, ref_py)
+  expect_equal(unclass(weights_fuj), ref_py)
 })

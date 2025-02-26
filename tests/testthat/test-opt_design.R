@@ -16,7 +16,7 @@ test_that("opt_design() finds optimization result for basksim and baskexact", {
                       design_params = design_params,
                       scenarios = scenarios,
                       prec_digits = prec_digits)
-  expect_not_equal(res, res_x)
+  expect_true(abs(res - res_x) > 0.0001)
   expect_equal(res, res_x, tolerance = 0.1, ignore_attr = T)
 })
 
