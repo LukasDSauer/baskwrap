@@ -7,6 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/LukasDSauer/baskwrap/graph/badge.svg)](https://app.codecov.io/gh/LukasDSauer/baskwrap)
+[![R-CMD-check](https://github.com/LukasDSauer/baskwrap/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/LukasDSauer/baskwrap/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The baskwrap package supplies a unified wrapper to several basket trial
@@ -77,28 +78,28 @@ get_details(design = set_backend(design, "sim"),
             n = n, p1 = p1, lambda = lambda,
             epsilon = epsilon, tau = tau)
 #> $Rejection_Probabilities
-#> [1] 0.155 0.954 0.965
+#> [1] 0.153 0.965 0.968
 #> 
 #> $FWER
-#> [1] 0.155
+#> [1] 0.153
 #> 
 #> $EWP
 #> [1] 0.998
 #> 
 #> $Mean
-#> [1] 0.2370808 0.4933225 0.4953923
+#> [1] 0.2304727 0.4991730 0.4951854
 #> 
 #> $MSE
-#> [1] 0.009863588 0.010143816 0.009251075
+#> [1] 0.009554403 0.010389972 0.009465521
 #> 
 #> $Lower_CL
-#> [1] 0.09590743 0.33650811 0.33765503
+#> [1] 0.09109817 0.34099585 0.33751286
 #> 
 #> $Upper_CL
-#> [1] 0.3919698 0.6500348 0.6529790
+#> [1] 0.3842372 0.6570925 0.6527386
 #> 
 #> $ECD
-#> [1] 2.764
+#> [1] 2.78
 #> 
 #> $p0
 #> [1] 0.2
