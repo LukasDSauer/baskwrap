@@ -6,6 +6,8 @@ shape1_py <- 1
 shape2_py <- 1
 p0_py <- 0.2
 p1_py <- c(0.2, 0.2, 0.5, 0.5)
+p1_py_toer_eq0 <- c(0.5, 0.5, 0.5, 0.5)
+p1_py_pow_eq0 <- c(0.2, 0.2, 0.2, 0.2)
 n_py <- 15
 r_py <- c(2, 9, 9, 10)
 epsilon_py <- 1.5
@@ -15,6 +17,9 @@ logbase_py <- exp(1)
 design_py <- setup_fujikawa_x(k = k_py,
                               p0 = p0_py,
                               backend = "exact")
+design_py_sim <- setup_fujikawa_x(k = k_py,
+                              p0 = p0_py,
+                              backend = "sim")
 # PARAMETERS USED IN MC-SIMULATED EXAMPLES
 k_sim <- 4
 shape1_sim <- 1

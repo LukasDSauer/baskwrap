@@ -3,6 +3,8 @@ test_that("error messages for erroneous classes work", {
   expect_error(setup_fujikawa_x(k = 0.5, p0 = 0.2))
   # k less than 2
   expect_error(setup_fujikawa_x(k = 1, p0 = 0.2))
+  # p0 less than 0
+  expect_error(setup_fujikawa_x(k = 3, p0 = -0.2))
   # shape1 less than or equal to 0
   expect_error(setup_fujikawa_x(k = 3, p0 = 0.2, shape1 = 0, shape2 = 1))
   # shape2 less than or equal to 0

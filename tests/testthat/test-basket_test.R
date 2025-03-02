@@ -1,5 +1,5 @@
 test_that("basket_test delivers the same results as python", {
-  res <- basket_test(design = design_py,
+  res <- basket_test(design = design_py_sim,
                       n = n_py,
                       r = r_py,
                       lambda = lambda_py,
