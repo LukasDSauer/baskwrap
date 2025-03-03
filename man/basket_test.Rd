@@ -7,8 +7,8 @@
 basket_test(design, ...)
 }
 \arguments{
-\item{design}{An object created with one of the \code{setup} functions from
-the \code{basksim} package.}
+\item{design}{An object created with one of the \code{setup_} functions from
+the \code{basksim} package or the \code{baskwrap} package.}
 
 \item{...}{Further arguments.}
 }

@@ -34,6 +34,10 @@ basksim::get_details
 #' weights? Default is `baskexact::weights_fujikawa`.
 #' @param weight_params A list of tuning parameters specific to `weight_fun`.
 #' By default, it takes the function arguments `epsilon`, `tau` and `logbase`.
+#' @param globalweight_fun Which functions should be used to calculated the
+#' global weights? Currently, this is only supported for the exact backend.
+#' @param globalweight_params A list of tuning parameters specific to
+#' `globalweight_fun`.
 #' @param which_details A character vector specifying which details should be
 #' calculated. This is used only for `backend = "exact"`, where the number of
 #' details is relevant for runtime. Default is `"all"`, see details for
@@ -80,6 +84,8 @@ get_details.fujikawa_x <- function(design, ...,
                                    weight_params = list(epsilon = epsilon,
                                                         tau = tau,
                                                         logbase = logbase),
+                                   globalweight_fun = NULL,
+                                   globalweight_params = list(),
                                    which_details = "all", verbose = TRUE){
   if(design$backend == "sim"){
     return(c(NextMethod(),
@@ -142,6 +148,8 @@ get_details.fujikawa_x <- function(design, ...,
       res <- baskexact::pow(design$design_exact, p1 = p1, n = n,
                             lambda = lambda, weight_fun = weight_fun,
                             weight_params = weight_params,
+                            globalweight_fun = globalweight_fun,
+                            globalweight_params = globalweight_params,
                             results = results_pow)
       FWER <- 0
       if(results_pow == "group"){
@@ -156,6 +164,8 @@ get_details.fujikawa_x <- function(design, ...,
       res <- baskexact::toer(design$design_exact, p1 = p1, n = n,
                              lambda = lambda, weight_fun = weight_fun,
                              weight_params = weight_params,
+                             globalweight_fun = globalweight_fun,
+                             globalweight_params = globalweight_params,
                              results = results_toer)
       if(results_toer == "group"){
         FWER <- res$fwer
@@ -171,6 +181,8 @@ get_details.fujikawa_x <- function(design, ...,
         res_fwer <- baskexact::toer(design$design_exact, p1 = p1, n = n,
                                lambda = lambda, weight_fun = weight_fun,
                                weight_params = weight_params,
+                               globalweight_fun = globalweight_fun,
+                               globalweight_params = globalweight_params,
                                results = results_toer)
         if(results_toer == "group"){
           FWER <- res_fwer$fwer
@@ -183,6 +195,8 @@ get_details.fujikawa_x <- function(design, ...,
         res_ewp <- baskexact::pow(design$design_exact, p1 = p1, n = n,
                                   lambda = lambda, weight_fun = weight_fun,
                                   weight_params = weight_params,
+                                  globalweight_fun = globalweight_fun,
+                                  globalweight_params = globalweight_params,
                                   results = results_pow)
         if(results_pow == "group"){
           EWP <- res_ewp$ewp
@@ -198,6 +212,8 @@ get_details.fujikawa_x <- function(design, ...,
       res_estim <- baskexact::estim(design = design$design_exact, p1 = p1, n = n,
                                     lambda = lambda, weight_fun = weight_fun,
                                     weight_params = weight_params,
+                                    globalweight_fun = globalweight_fun,
+                                    globalweight_params = globalweight_params,
                                     ...)
       Mean <- res_estim$Mean
       MSE <- res_estim$MSE
@@ -205,7 +221,10 @@ get_details.fujikawa_x <- function(design, ...,
     if("ECD" %in% which_details){
       ECD <- baskexact::ecd(design = design$design_exact, p1 = p1, n = n,
                             lambda = lambda, weight_fun = weight_fun,
-                            weight_params = weight_params, ...)
+                            weight_params = weight_params,
+                            globalweight_fun = globalweight_fun,
+                            globalweight_params = globalweight_params,
+                            ...)
     }
     if("Rejection_Probabilities" %in% which_details){
       if(!is.null(res$Rejection_Probabilities)){

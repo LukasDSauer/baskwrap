@@ -28,6 +28,7 @@
 #'
 #' @inheritParams pow
 #' @inherit plot_weights.fujikawa_x examples
+#' @export
 check_mon_within <- function(design, ...) {
   UseMethod("check_mon_within", design)
 }

@@ -27,8 +27,8 @@ estim(design, ...)
 )
 }
 \arguments{
-\item{design}{An object created with one of the \code{setup} functions from
-the \code{basksim} package.}
+\item{design}{An object created with one of the \code{setup_} functions from
+the \code{basksim} package or the \code{baskwrap} package.}
 
 \item{...}{Further arguments.}
 
@@ -39,8 +39,29 @@ the \code{basksim} package.}
 
 \item{lambda}{The posterior probability threshold.}
 
+\item{epsilon}{Tuning parameter that determines the amount of borrowing.
+See \code{\link[basksim]{setup_fujikawa}}).}
+
+\item{tau}{Tuning parameter that determines how similar the baskets
+have to be that information is shared. See \code{\link[basksim]{setup_fujikawa}}).}
+
+\item{logbase}{Tuning parameter. The base of the logarithm that is used to
+calculate the Jensen-Shannon divergence.}
+
 \item{iter}{The number of iterations in the simulation. Is ignored if
 \code{data} is specified.}
+
+\item{weight_fun}{Which functions should be used to calculated the pairwise
+weights? Default is \code{baskexact::weights_fujikawa}.}
+
+\item{weight_params}{A list of tuning parameters specific to \code{weight_fun}.
+By default, it takes the function arguments \code{epsilon}, \code{tau} and \code{logbase}.}
+
+\item{globalweight_fun}{Which functions should be used to calculated the
+global weights? Currently, this is only supported for the exact backend.}
+
+\item{globalweight_params}{A list of tuning parameters specific to
+\code{globalweight_fun}.}
 }
 \value{
 A list containing means of the posterior distribution and
@@ -59,5 +80,5 @@ select posterior mean and mean squared error.
 # Example for a basket trial with Fujikawa's Design
 design <- setup_fujikawa_x(k = 3, p0 = 0.2)
 estim(design = design, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
-     design_params = list(epsilon = 2, tau = 0), iter = 100)
+     epsilon = 2, tau = 0, iter = 100)
 }

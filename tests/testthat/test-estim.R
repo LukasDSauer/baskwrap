@@ -7,7 +7,7 @@ test_that("estim produces the same results as python", {
                 tau = tau_py,
                 weight_fun = baskexact::weights_fujikawa,
                 logbase = logbase_py)
-  ref_py <- readRDS(here::here(path_refdata, "ref_details_py.RDS"))
+  ref_py <- readRDS(test_path(path_refdata_rel, "ref_details_py.RDS"))
   expect_equal(res$Mean, ref_py$mean,
                ignore_attr = TRUE)
   expect_equal(res$MSE, ref_py$mse,

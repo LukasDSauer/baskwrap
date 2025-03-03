@@ -79,7 +79,7 @@ test_that("get_details() results coincide with python", {
                      logbase = logbase_py,
                      iter = NULL,
                      verbose = TRUE)
-  ref_py <- readRDS(here::here(path_refdata, "ref_details_py.RDS"))
+  ref_py <- readRDS(test_path(path_refdata_rel, "ref_details_py.RDS"))
   expect_equal(res$FWER, ref_py$fwer,
                ignore_attr = TRUE, tolerance = 1e-7)
   expect_equal(res$EWP, ref_py$ewp,
@@ -114,7 +114,7 @@ test_that("get_details() results coincide with python when requesting FWER only"
                      logbase = logbase_py,
                      which_details = c("Rejection_Probabilities"),
                      verbose = FALSE)
-  ref_py <- readRDS(here::here(path_refdata, "ref_details_py.RDS"))
+  ref_py <- readRDS(test_path(path_refdata_rel, "ref_details_py.RDS"))
   expect_equal(res$FWER, ref_py$fwer,
                ignore_attr = TRUE, tolerance = 1e-7)
   expect_equal(res_only_rej$FWER, ref_py$fwer,

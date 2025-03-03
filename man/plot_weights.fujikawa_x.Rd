@@ -9,12 +9,13 @@
   n,
   r1,
   weight_fun = baskexact::weights_fujikawa,
-  weight_params = list()
+  weight_params = list(),
+  ...
 )
 }
 \arguments{
-\item{design}{An object of class \code{Basket} created by
-\code{setupOneStageBasket} or \code{setupTwoStageBasket}.}
+\item{design}{An object created with one of the \code{setup_} functions from
+the \code{basksim} package or the \code{baskwrap} package.}
 
 \item{n}{The sample size per basket.}
 
@@ -25,6 +26,8 @@ weights.}
 
 \item{weight_params}{A list of tuning parameters specific to
 \code{weight_fun}.}
+
+\item{...}{Further arguments.}
 }
 \description{
 This function is a wrapper of \code{baskexact::plot_weights()}. It visualizes

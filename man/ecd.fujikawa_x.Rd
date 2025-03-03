@@ -57,8 +57,8 @@ weights? Default is \code{baskexact::weights_fujikawa}.}
 \item{weight_params}{A list of tuning parameters specific to \code{weight_fun}.
 By default, it takes the function arguments \code{epsilon}, \code{tau} and \code{logbase}.}
 
-\item{globalweight_fun}{Which function should be used to calculate the
-global weights.}
+\item{globalweight_fun}{Which functions should be used to calculated the
+global weights? Currently, this is only supported for the exact backend.}
 
 \item{globalweight_params}{A list of tuning parameters specific to
 \code{globalweight_fun}.}
