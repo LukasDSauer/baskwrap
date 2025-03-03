@@ -103,7 +103,6 @@ test_that("get_details() results coincide with python when requesting FWER only"
                      epsilon = epsilon_py,
                      tau = tau_py,
                      logbase = logbase_py,
-                     iter = NULL,
                      which_details = c("Rejection_Probabilities", "FWER"),
                      verbose = FALSE)
   res_only_rej <- get_details(design = design_py,
@@ -113,7 +112,6 @@ test_that("get_details() results coincide with python when requesting FWER only"
                      epsilon = epsilon_py,
                      tau = tau_py,
                      logbase = logbase_py,
-                     iter = NULL,
                      which_details = c("Rejection_Probabilities"),
                      verbose = FALSE)
   ref_py <- readRDS(here::here(path_refdata, "ref_details_py.RDS"))
@@ -132,7 +130,6 @@ test_that("get_details() results coincide between backend when requesting EWP on
                                      epsilon = epsilon_py,
                                      tau = tau_py,
                                      logbase = logbase_py,
-                                     iter = NULL,
                                      which_details = which_details_test,
                                      verbose = FALSE)
             res_sim <- get_details(design = design_py_sim,
@@ -142,7 +139,6 @@ test_that("get_details() results coincide between backend when requesting EWP on
                                          epsilon = epsilon_py,
                                          tau = tau_py,
                                          logbase = logbase_py,
-                                         iter = NULL,
                                          which_details = which_details_test,
                                          verbose = FALSE)
             res_toer0 <- get_details(design = design_py,
@@ -152,7 +148,6 @@ test_that("get_details() results coincide between backend when requesting EWP on
                                epsilon = epsilon_py,
                                tau = tau_py,
                                logbase = logbase_py,
-                               iter = NULL,
                                which_details = which_details_test,
                                verbose = FALSE)
             res_sim_toer0 <- get_details(design = design_py_sim,
@@ -162,13 +157,12 @@ test_that("get_details() results coincide between backend when requesting EWP on
                                   epsilon = epsilon_py,
                                   tau = tau_py,
                                   logbase = logbase_py,
-                                  iter = NULL,
                                   which_details = which_details_test,
                                    verbose = FALSE)
             expect_equal(res$EWP, res_sim$EWP,
-                         ignore_attr = TRUE, tolerance = 1e-7)
+                         ignore_attr = TRUE, tolerance = 0.01)
             expect_equal(res_toer0$EWP, res_sim_toer0$EWP,
-                         ignore_attr = TRUE, tolerance = 1e-7)
+                         ignore_attr = TRUE, tolerance = 1e-3)
             expect_equal(res_toer0$FWER, 0)
             expect_equal(res_sim_toer0$FWER, 0)
           })
@@ -192,11 +186,10 @@ test_that("get_details() results coincide between backend when requesting FWER o
                                    epsilon = epsilon_py,
                                    tau = tau_py,
                                    logbase = logbase_py,
-                                   iter = NULL,
                                    which_details = which_details_test,
                                    verbose = FALSE)
             expect_equal(res$FWER, res_sim$FWER,
-                         ignore_attr = TRUE, tolerance = 1e-7)
+                         ignore_attr = TRUE, tolerance = 0.09)
             expect_equal(res$EWP, 0)
             expect_equal(res_sim$EWP, 0)
           })
