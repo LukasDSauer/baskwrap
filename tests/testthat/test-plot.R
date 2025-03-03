@@ -8,5 +8,10 @@ test_that("plot of weights coincides with snapshot", {
   fig_path <- here::here(path_refdata,
                          "ref_weights_plot.png")
   ggplot2::ggsave(fig_path, p)
-  expect_snapshot_file(fig_path, "snap_weights_plot.png")
+  expect_snapshot_file(path = fig_path,
+                       name = "snap_weights_plot.png",
+                       variant = gsub(" ", "",
+                                      paste0(Sys.info()["sysname"], "_",
+                                             Sys.info()["release"],
+                                             Sys.info()["version"])))
 })
