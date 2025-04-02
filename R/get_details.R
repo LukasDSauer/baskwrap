@@ -211,7 +211,10 @@ get_details.fujikawa_x <- function(design, ...,
       if(!is.null(res$Rejection_Probabilities)){
         Rejection_Probabilities <- res$Rejection_Probabilities
       } else{
+        # This line is currently not in use
+        # nocov start
         Rejection_Probabilities <- res$rejection_probabilities
+        # nocov end
       }
 
     }
