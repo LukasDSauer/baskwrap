@@ -7,9 +7,8 @@
 #' `estim.default` is in fact just a wrapper of `basksim::get_details()` that
 #' select posterior mean and mean squared error.
 #'
-#' @param design An object created with one of the `setup` functions from
-#' the `basksim` package.
 #' @inheritParams pow
+#' @inheritParams get_details.fujikawa_x
 #'
 #' @return A list containing means of the posterior distribution and
 #' the mean squared errors for all baskets.
@@ -20,7 +19,7 @@
 #' # Example for a basket trial with Fujikawa's Design
 #' design <- setup_fujikawa_x(k = 3, p0 = 0.2)
 #' estim(design = design, n = 20, p1 = c(0.2, 0.5, 0.5), lambda = 0.95,
-#'      design_params = list(epsilon = 2, tau = 0), iter = 100)
+#'      epsilon = 2, tau = 0, iter = 100)
 estim <- function(design, ...) {
   UseMethod("estim", design)
 }

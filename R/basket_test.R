@@ -5,6 +5,7 @@
 #' @inheritParams pow
 #'
 #' @inherit basket_test.fujikawa_x examples
+#' @export
 basket_test <- function(design, ...) {
   UseMethod("basket_test", design)
 }

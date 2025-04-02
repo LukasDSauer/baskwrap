@@ -18,6 +18,8 @@
   data = NULL,
   weight_fun = baskexact::weights_fujikawa,
   weight_params = list(epsilon = epsilon, tau = tau, logbase = logbase),
+  globalweight_fun = NULL,
+  globalweight_params = list(),
   which_details = "all",
   verbose = TRUE
 )
@@ -57,6 +59,12 @@ weights? Default is \code{baskexact::weights_fujikawa}.}
 
 \item{weight_params}{A list of tuning parameters specific to \code{weight_fun}.
 By default, it takes the function arguments \code{epsilon}, \code{tau} and \code{logbase}.}
+
+\item{globalweight_fun}{Which functions should be used to calculated the
+global weights? Currently, this is only supported for the exact backend.}
+
+\item{globalweight_params}{A list of tuning parameters specific to
+\code{globalweight_fun}.}
 
 \item{which_details}{A character vector specifying which details should be
 calculated. This is used only for \code{backend = "exact"}, where the number of

@@ -5,7 +5,7 @@ library(here)
 library(reticulate)
 library(baskexact)
 use_virtualenv()
-devtools::load_all()
+# Load all functions, e.g. using devtools::load_all()
 source(here(testthat::test_path(), "helper-refdata.R"))
 
 # PARAMETERS

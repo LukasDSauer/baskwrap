@@ -4,8 +4,8 @@
 #' design. It defaults to the function `pow.default` which works similarly to
 #' `basksim::toer` and does not rely on any `baskwrap`-specific function.
 #'
-#' @param design An object created with one of the `setup` functions from
-#' the `basksim` package.
+#' @param design An object created with one of the `setup_` functions from
+#' the `basksim` package or the `baskwrap` package.
 #' @inheritParams basksim::toer
 #' @param p1 Probabilities under the alternative hypothesis. If
 #' `length(p1) == 1`, then this is a common probability for all baskets.

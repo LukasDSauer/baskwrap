@@ -5,6 +5,7 @@
 #'
 #' @inheritParams pow
 #' @inherit plot_weights.fujikawa_x examples
+#' @export
 plot_weights <- function(design, ...) {
   UseMethod("plot_weights", design)
 }
@@ -13,6 +14,7 @@ plot_weights <- function(design, ...) {
 #' This function is a wrapper of `baskexact::plot_weights()`. It visualizes
 #' the weight functions defined for Fujikawa et al.'s design.
 #'
+#' @inheritParams plot_weights
 #' @inheritParams baskexact::plot_weights
 #' @export
 #'
@@ -24,7 +26,8 @@ plot_weights.fujikawa_x <- function(design,
                                     n,
                                     r1,
                                     weight_fun = baskexact::weights_fujikawa,
-                                    weight_params = list()) {
+                                    weight_params = list(),
+                                    ...) {
   if(is.null(design$design_exact)){
     design <- set_design_exact(design)
   }

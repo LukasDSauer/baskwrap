@@ -6,7 +6,7 @@ test_that("ecd() results coincide with python", {
                      epsilon = epsilon_py,
                      tau = tau_py,
                      logbase = logbase_py)
-  ref_py <- readRDS(here::here(path_refdata, "ref_details_py.RDS"))
+  ref_py <- readRDS(test_path(path_refdata_rel, "ref_details_py.RDS"))
   expect_equal(res, ref_py$ecd,
                ignore_attr = TRUE)
 })
