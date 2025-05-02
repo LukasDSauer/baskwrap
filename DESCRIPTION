@@ -1,11 +1,13 @@
 Package: baskwrap
 Title: Wrapper Package for Several Basket Trial R Packages
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     person("Lukas D", "Sauer", , "sauer@imbi.uni-heidelberg.de",
            role = c("aut", "cre"),
            comment = c(ORCID = "https://orcid.org/0000-0002-1340-9994"))
-Description: Wrapper Package for Several Basket Trial R Packages.
+Description: The baskwrap package provides a simple interface to switch between 
+    two methods for calculating basket trial characteristics, numerical 
+    integration ("exact") and Monte Carlo simulation ("simulated").
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
