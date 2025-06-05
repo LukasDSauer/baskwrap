@@ -24,3 +24,27 @@ test_that("weights_fujikawa_x delivers the same results as python", {
   ref_py <- readRDS(test_path(path_refdata_rel, "ref_weights_py.RDS"))
   expect_equal(unclass(weights_fuj), ref_py)
 })
+
+test_that("weights_hellinger delivers the expected results", {
+  weights_hld <- weights_hellinger(design = design_py,
+                                    n = n_py,
+                                    epsilon = epsilon_py,
+                                    tau = tau_py,
+                                    logbase = logbase_py)
+
+  hld <- function(r1, r2){
+    a1 <- design_py$shape1 + r1
+    b1 <- design_py$shape2 + (n_py - r1)
+    a2 <- design_py$shape1 + r2
+    b2 <- design_py$shape2 + (n_py - r2)
+    return(1- beta((a1 + a2)/2, (b1 + b2)/2)/sqrt(beta(a1, b1)*beta(a2, b2)))
+  }
+  r1 <- 9
+  r2 <- 4
+  expect_equal(weights_hld[r1 + 1, r2 + 1], hld(r1, r2)^epsilon_py)
+  # If hld^epsilon is less than tau, the weight should be 0.
+  r1 <- 6
+  r2 <- 7
+  expect_equal(weights_hld[r1 + 1, r2 + 1], 0)
+  expect_true(hld(r1, r2)^epsilon_py <= tau_py)
+})

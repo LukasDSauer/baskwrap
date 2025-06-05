@@ -4,6 +4,8 @@
 \alias{weights_fujikawa_x}
 \alias{weights_fujikawa_vanilla}
 \alias{weights_fujikawa_tuned}
+\alias{weights_hellinger_vanilla}
+\alias{weights_hellinger}
 \title{Weights based on Fujikawa et al.'s basket trial design}
 \usage{
 weights_fujikawa_x(design, n, logbase, epsilon, tau, ...)
@@ -11,6 +13,10 @@ weights_fujikawa_x(design, n, logbase, epsilon, tau, ...)
 weights_fujikawa_vanilla(design, n, logbase, ...)
 
 weights_fujikawa_tuned(weight_mat, epsilon = 1.25, tau = 0.5, ...)
+
+weights_hellinger_vanilla(design, n, ...)
+
+weights_hellinger(design, n, epsilon, tau, ...)
 }
 \arguments{
 \item{design}{An object of class \code{fujikawa_x}.}
@@ -41,11 +47,26 @@ that calls this with \code{epsilon = 1} and \code{tau = 0}
 without pruning. Hence, this function returns precisely Fujikawa et al.'s
 weights without any tuning. The function \code{weights_fujikawa_tuned} tunes an
 existing weight matrix using the parameters \code{epsilon} and \code{tau} in accordance
-with Fujikawa et al.'s tuning rules.
+with Fujikawa et al.'s tuning rules. The function \code{weights_hellinger} and
+the "convenience wrapper" \code{weights_hellinger_vanilla} are a variant of the
+weights defined by Fujikawa were the divergence is calculated using the
+Hellinger distance instead of the Jensen-Shannon divergence (see Details).
+}
+\details{
+For posterior
+beta distributions as in Fujikawa's design, the Hellinger distance can be
+calculated "analytically", e.g. for posterior parameters \eqn{(a_1,b_1)} and
+\eqn{(a_2,b_2)}, we have
+\deqn{HLD(\mathrm{Beta}(a_1,b_1),\mathrm{Beta}(a_2,b_2)) = 1 - \frac{B(\frac{a_1+a_2}{2},\frac{b_1+b_2}{2})}{\sqrt{B(a_1,b_1)B(a_2,b_2)}},}
+where \eqn{B(\cdot,\cdot)} is the beta function (Sasha 2012).
 }
 \examples{
 design <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "exact")
 weight_mat <- weights_fujikawa_vanilla(design, n = 20, logbase = 2)
 weight_mat_tuned <- weights_fujikawa_tuned(weight_mat, epsilon = 1.25,
                                            tau = 0.5)
+}
+\references{
+Sasha. Answer to "Hellinger distance between Beta distributions";
+2012. Available from: https://math.stackexchange.com/a/165399/332808
 }
