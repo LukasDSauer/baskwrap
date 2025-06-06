@@ -31,7 +31,7 @@ is_baskexact_design <- function(design, baskexact_class){
 #' @export
 #'
 #' @examples
-#' design <- setupOneStageBasket(k = 3, p0 = 0.2)
+#' design <- baskexact::setupOneStageBasket(k = 3, p0 = 0.2)
 #' design <- convert_to_fujikawa_x(design)
 convert_to_fujikawa_x <- function(design){
   if("fujikawa_x" %in% class(design)){
