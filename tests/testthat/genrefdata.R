@@ -18,7 +18,7 @@ weights <- baskexact::weights_fujikawa(design = design_be,
                                    lambda = NULL,
                                    epsilon = 1,
                                    tau = 0)
-saveRDS(weights, here(path_refdata, "ref_weights_fujikawa_vanilla.RDS"))
+saveRDS(weights, here(path_refdata, "ref_weights_jsd_vanilla.RDS"))
 weights_tuned <- baskexact::weights_fujikawa(design = design_be,
                                          n = 20,
                                          lambda = NULL,

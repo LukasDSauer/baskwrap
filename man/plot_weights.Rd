@@ -18,6 +18,14 @@ only implemented for designs of class \code{fujikawa_x}.
 }
 \examples{
 design_x <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "exact")
+# Default weight function is baskexact::weights_fujikawa, which is identical
+# to the Jensen-Shannon weights
 plot_weights(design = design_x, n = 20, r1 = 11,
+             weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2)))
+# Explicitly compare Jensen-Shannon and Hellinger weights
+plot_weights(design = design, n = 20, r1 = 11, weight_fun = weights_jsd,
+             weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2),
+                                  logbase = 2))
+plot_weights(design = design, n = 20, r1 = 11, weight_fun = weights_hld,
              weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2)))
 }
