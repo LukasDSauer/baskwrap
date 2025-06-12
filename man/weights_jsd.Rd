@@ -6,7 +6,7 @@
 \alias{weights_fujikawa_tuned}
 \alias{weights_hld_vanilla}
 \alias{weights_hld}
-\title{Further weight function}
+\title{Further weight functions}
 \usage{
 weights_jsd(design, n, logbase, epsilon, tau, lambda = NULL, ...)
 

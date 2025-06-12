@@ -17,6 +17,6 @@ This function can currently convert objects for class \code{"OneStageBasket"} fr
 the \code{baskexact} package to objects of class \code{fujikawa_x}.
 }
 \examples{
-design <- setupOneStageBasket(k = 3, p0 = 0.2)
+design <- baskexact::setupOneStageBasket(k = 3, p0 = 0.2)
 design <- convert_to_fujikawa_x(design)
 }

@@ -1,4 +1,4 @@
-#' Further weight function
+#' Further weight functions
 #'
 #' A couple of weight functions additional to the ones implemented in `baskexact`
 #' are supplied. The weight functions are based on the Jensen-Shannon divergence
