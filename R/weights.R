@@ -85,6 +85,12 @@ weights_jsd <- function(design, n, logbase, epsilon, tau, lambda = NULL, ...){
              class(design), " from ", attr(design, "package"))
       }
     }
+  } else if ("fujikawa" %in% class(design)) {
+    weights_jsd(design = convert_to_fujikawa_x(design), n = n,
+                logbase = logbase, epsilon = epsilon, tau = tau,
+                lambda = lambda, ...)
+  } else {
+    stop("weights_jsd is not yet implemented for this design object.")
   }
 }
 #' @export

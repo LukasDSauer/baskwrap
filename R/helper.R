@@ -37,11 +37,17 @@ convert_to_fujikawa_x <- function(design){
   if("fujikawa_x" %in% class(design)){
     return(design)
   } else if(is_baskexact_design(design, "OneStageBasket")) {
-    setup_fujikawa_x(k = design@k,
+    return(setup_fujikawa_x(k = design@k,
                      p0 = design@p0,
                      shape1 = design@shape1,
                      shape2 = design@shape2,
-                     backend = "exact")
+                     backend = "exact"))
+  } else if("fujikawa" %in% class(design)){
+    return(setup_fujikawa_x(k = design$k,
+                            p0 = design$p0,
+                            shape1 = design$shape1,
+                            shape2 = design$shape2,
+                            backend = "sim"))
   } else {
     stop("Cannot convert this object to object of class fujikawa_x.")
   }
