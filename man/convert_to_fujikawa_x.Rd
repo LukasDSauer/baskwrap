@@ -2,9 +2,15 @@
 % Please edit documentation in R/helper.R
 \name{convert_to_fujikawa_x}
 \alias{convert_to_fujikawa_x}
-\title{Convert to a fujikawa_x object}
+\alias{convert_to_baskexact}
+\alias{convert_to_basksim}
+\title{Class conversions}
 \usage{
 convert_to_fujikawa_x(design)
+
+convert_to_baskexact(design)
+
+convert_to_basksim(design)
 }
 \arguments{
 \item{design}{An R object.}
@@ -13,10 +19,20 @@ convert_to_fujikawa_x(design)
 An object of class \code{fujikawa_x}.
 }
 \description{
-This function can currently convert objects for class \code{"OneStageBasket"} from
-the \code{baskexact} package to objects of class \code{fujikawa_x}.
+These convenience functions can convert objects from the \code{baskexact},
+\code{basksim} and \code{baskwrap} into one another.
+}
+\details{
+\code{convert_to_fujikawa_x()} can currently convert objects of class
+\code{"OneStageBasket"} from the \code{baskexact} package to objects of class
+\code{fujikawa_x}. The functions \code{convert_to_baskexact()} and
+\code{convert_to_basksim()} can convert \code{fujikawa_x} objects to \code{baskexact}
+and \code{basksim} objects, respectively.
 }
 \examples{
 design <- baskexact::setupOneStageBasket(k = 3, p0 = 0.2)
-design <- convert_to_fujikawa_x(design)
+design_fujx <- convert_to_fujikawa_x(design)
+design_bsim <- convert_to_basksim(design_fujx)
+# Below should be identical to initial design
+design_bx <- convert_to_baskexact(design_fujx)
 }

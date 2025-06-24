@@ -68,9 +68,7 @@ weights_jsd <- function(design, n, logbase, epsilon, tau, lambda = NULL, ...){
                                 epsilon = epsilon,
                                 tau = tau,
                                 logbase = logbase, ...))
-  } else if(!is.null(attr(class(design), "package"))){
-    if("baskexact" %in% attr(class(design), "package")){
-      if("OneStageBasket" %in% class(design)){
+  } else if(is_baskexact_design(design, "OneStageBasket")){
         return(baskexact::weights_fujikawa(
           design = design,
           n = n,
@@ -80,17 +78,12 @@ weights_jsd <- function(design, n, logbase, epsilon, tau, lambda = NULL, ...){
           logbase = logbase,
           ...
         ))
-      } else {
-        stop("weights_jsd is not yet implemented for designs of class ",
-             class(design), " from ", attr(design, "package"))
-      }
-    }
   } else if ("fujikawa" %in% class(design)) {
     weights_jsd(design = convert_to_fujikawa_x(design), n = n,
                 logbase = logbase, epsilon = epsilon, tau = tau,
                 lambda = lambda, ...)
   } else {
-    stop("weights_jsd is not yet implemented for this design object.")
+    stop("weights_jsd is not yet implemented for a design of this class.")
   }
 }
 #' @export
@@ -111,8 +104,8 @@ weights_fujikawa_tuned <- function(weight_mat, epsilon = 1.25,
 weights_hld_vanilla <- function(design, n, ...){
   if(is_baskexact_design(design, "OneStageBasket")){
     design <- convert_to_fujikawa_x(design)
-  } else if(!("fujikawa_x" %in% class(design))){
-    stop("design must be of class fujikawa_x or of class OneStageBasket.")
+  } else if(!("fujikawa" %in% class(design))){
+    stop("design must be of class fujikawa or of class OneStageBasket.")
   }
   shape1_post <- design$shape1 + c(0:n)
   shape2_post <- design$shape2 + c(n:0)

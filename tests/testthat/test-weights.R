@@ -2,7 +2,12 @@ test_that("weights_jsd_vanilla and *_tuned deliver the same results as
            baskexact", {
   n <- 20
   design <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "sim")
+  design_bx <- baskexact::setupOneStageBasket(k = 3, p0 = 0.2)
+  design_bsim <- basksim::setup_fujikawa(k = 3, p0 = 0.2)
   weight_mat_vanilla <- weights_jsd_vanilla(design, n = n, logbase = 2)
+  weight_mat_vanilla_bx <- weights_jsd_vanilla(design_bx, n = n, logbase = 2)
+  weight_mat_vanilla_bsim <- weights_jsd_vanilla(design_bsim, n = n, logbase = 2)
+  expect_error(weights_jsd_vanilla("not a design at all", n = n, logbase = 2))
   weight_mat_tuned <- weights_fujikawa_tuned(weight_mat_vanilla, epsilon = 2.5,
                                              tau = 0.2)
   # Loading reference data
@@ -12,6 +17,8 @@ test_that("weights_jsd_vanilla and *_tuned deliver the same results as
                                  "ref_weights_fujikawa_tuned.RDS"))
   # Comparison
   expect_equal(weight_mat_vanilla, ref_vanilla)
+  expect_equal(weight_mat_vanilla, weight_mat_vanilla_bx)
+  expect_equal(weight_mat_vanilla, weight_mat_vanilla_bsim)
   expect_equal(weight_mat_tuned, ref_tuned)
 })
 
@@ -47,4 +54,16 @@ test_that("weights_hld delivers the expected results", {
   r2 <- 12
   expect_equal(weights_hld[r1 + 1, r2 + 1], 0)
   expect_true((1 - hld(r1, r2))^epsilon_py <= tau_py)
+  weights_hld_bx <- weights_hld(design = convert_to_baskexact(design_py),
+                             n = n_py,
+                             epsilon = epsilon_py,
+                             tau = tau_py,
+                             logbase = logbase_py)
+  weights_hld_bsim  <- weights_hld(design = convert_to_basksim(design_py),
+                                 n = n_py,
+                                 epsilon = epsilon_py,
+                                 tau = tau_py,
+                                 logbase = logbase_py)
+  expect_equal(weights_hld_bx, weights_hld)
+  expect_equal(weights_hld_bsim, weights_hld)
 })
