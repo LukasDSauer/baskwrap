@@ -10,7 +10,7 @@ basksim::get_details
 #' `basksim::get_details.fujikawa`.
 #' * If `design$backend == "exact"`, the details are calculated using
 #' `baskexact::toer`, `baskexact::pow` and `baskexact::estim`. Note that the
-#' standard weight function `baskexact::weights_fujikawa` calculates the weights
+#' standard weight function `weights_jsd` calculates the weights
 #' anew for each of the three function calls. This may compromise performance
 #' and can be fixed by manually calculating the weights beforehand.
 #'
@@ -31,7 +31,7 @@ basksim::get_details
 #' @param design An object of class `fujikawa_x`.
 #' @inheritParams basksim::get_details.fujikawa
 #' @param weight_fun Which functions should be used to calculated the pairwise
-#' weights? Default is `baskexact::weights_fujikawa`.
+#' weights? Default is `weights_jsd`.
 #' @param weight_params A list of tuning parameters specific to `weight_fun`.
 #' By default, it takes the function arguments `epsilon`, `tau` and `logbase`.
 #' @param globalweight_fun Which functions should be used to calculated the
@@ -80,7 +80,7 @@ get_details.fujikawa_x <- function(design, ...,
                                    n, p1 = NULL, lambda, level = 0.95,
                                    epsilon, tau, logbase = 2, iter = 1000,
                                    data = NULL,
-                                   weight_fun = baskexact::weights_fujikawa,
+                                   weight_fun = weights_jsd,
                                    weight_params = list(epsilon = epsilon,
                                                         tau = tau,
                                                         logbase = logbase),

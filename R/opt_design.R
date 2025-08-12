@@ -49,7 +49,7 @@ opt_design.fujikawa_x <- function(design, n, alpha,
                                   prec_digits,
                                   iter = 1000,
                                   data = NULL,
-                                  weight_fun = baskexact::weights_fujikawa,
+                                  weight_fun = weights_jsd,
                                   weight_params = design_params,
                                   globalweight_fun = NULL,
                                   globalweight_params = list(), ...){

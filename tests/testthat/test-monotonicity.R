@@ -16,14 +16,16 @@ test_that("within-trial monotonicity conditions coincide with published results
                                  lambda = 0.99,
                                  weight_fun = baskexact::weights_fujikawa,
                                  weight_params = list(epsilon = 5,
-                                                      tau = 0.4),
+                                                      tau = 0.4,
+                                                      logbase = 2),
                                 details = FALSE),
                TRUE)
   expect_equal(check_mon_within(design = design4, n = 24,
                                 lambda = 0.99,
-                                weight_fun = baskexact::weights_fujikawa,
+                                weight_fun = weights_jsd,
                                 weight_params = list(epsilon = 7,
-                                                     tau = 0.3),
+                                                     tau = 0.3,
+                                                     logbase = 2),
                                 details = FALSE),
                FALSE)
 })
@@ -46,14 +48,16 @@ test_that("between-trial monotonicity conditions coincide with published results
                                   lambda = 0.99,
                                   weight_fun = baskexact::weights_fujikawa,
                                   weight_params = list(epsilon = 3,
-                                                       tau = 0.1),
+                                                       tau = 0.1,
+                                                       logbase = 2),
                                   details = FALSE),
                  FALSE)
     expect_equal(check_mon_between(design = design4, n = 24,
                                   lambda = 0.99,
-                                  weight_fun = baskexact::weights_fujikawa,
+                                  weight_fun = weights_jsd,
                                   weight_params = list(epsilon = 7,
-                                                       tau = 0.4),
+                                                       tau = 0.4,
+                                                       logbase = 2),
                                   details = FALSE),
                  TRUE)
           })

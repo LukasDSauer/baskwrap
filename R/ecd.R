@@ -47,7 +47,7 @@ ecd.fujikawa_x <- function(design, n, p1, lambda,
                                                 tau = tau,
                                                 logbase = logbase),
                            iter = 1000, data = NULL,
-                           weight_fun = baskexact::weights_fujikawa,
+                           weight_fun = weights_jsd,
                            weight_params = design_params,
                            globalweight_fun = NULL,
                            globalweight_params = list(), ...){
