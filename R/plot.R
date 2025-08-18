@@ -23,14 +23,16 @@ plot_weights <- function(design, ...) {
 #' # Default weight function is weights_jsd, which is identical
 #' # to the Jensen-Shannon weights
 #' plot_weights(design = design, n = 20, r1 = 11,
-#'              weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2)))
+#'              weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2),
+#'                                   logbase = 2))
 #' # Explicitly compare Jensen-Shannon and Hellinger weights
 #' plot_weights(design = design, n = 20, r1 = 11,
 #'              weight_fun = baskexact::weights_fujikawa,
 #'              weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2),
 #'                                   logbase = 2))
 #' plot_weights(design = design, n = 20, r1 = 11, weight_fun = weights_hld,
-#'              weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2)))
+#'              weight_params = list(tau = 0, epsilon = c(0.25, 0.5, 1, 2),
+#'                                   logbase = 2))
 plot_weights.fujikawa_x <- function(design,
                                     n,
                                     r1,
