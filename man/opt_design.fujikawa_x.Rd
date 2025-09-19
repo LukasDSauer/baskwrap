@@ -13,7 +13,7 @@
   prec_digits,
   iter = 1000,
   data = NULL,
-  weight_fun = baskexact::weights_fujikawa,
+  weight_fun = weights_jsd,
   weight_params = design_params,
   globalweight_fun = NULL,
   globalweight_params = list(),
@@ -43,7 +43,7 @@ basket. Has to be generated with \code{get_data}. If \code{data} is used,
 then \code{iter} is ignored.}
 
 \item{weight_fun}{Which functions should be used to calculated the pairwise
-weights? Default is \code{baskexact::weights_fujikawa}.}
+weights? Default is \code{weights_jsd}.}
 
 \item{weight_params}{A list of tuning parameters specific to \code{weight_fun}.
 By default, it takes the function arguments \code{epsilon}, \code{tau} and \code{logbase}.}

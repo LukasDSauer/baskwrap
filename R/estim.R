@@ -35,7 +35,7 @@ estim.default <- function(design, ...) {
 #' @export
 estim.fujikawa_x <- function(design, n, p1, lambda = NULL, epsilon, tau,
                              logbase = 2, iter = 1000,
-                             weight_fun = baskexact::weights_fujikawa,
+                             weight_fun = weights_jsd,
                              weight_params = list(epsilon = epsilon,
                                                   tau = tau,
                                                   logbase = logbase),

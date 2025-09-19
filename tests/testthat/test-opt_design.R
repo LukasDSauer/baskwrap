@@ -2,7 +2,8 @@ test_that("opt_design() finds optimization result for basksim and baskexact", {
   set.seed(1994)
   design <- setup_fujikawa_x(k = 3, p0 = 0.2)
   alpha <- 0.05
-  design_params <- list(epsilon = c(1, 2), tau = c(0, 0.5))
+  design_params <- list(epsilon = c(1, 2), tau = c(0, 0.5),
+                        logbase = 2)
   scenarios <- get_scenarios(design, 0.4)
   prec_digits <- 3
   res <- opt_design(design = design,

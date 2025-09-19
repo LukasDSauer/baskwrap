@@ -27,7 +27,7 @@ basket_test <- function(design, ...) {
 #'             logbase = exp(1))
 basket_test.fujikawa_x <- function(design, n, r, lambda,
                                    epsilon, tau, logbase = 2,
-                                   weight_fun = baskexact::weights_fujikawa,
+                                   weight_fun = weights_jsd,
                                    weight_params = list(epsilon = epsilon,
                                                         tau = tau,
                                                         logbase = logbase),

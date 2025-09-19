@@ -16,7 +16,7 @@
   logbase = 2,
   iter = 1000,
   data = NULL,
-  weight_fun = baskexact::weights_fujikawa,
+  weight_fun = weights_jsd,
   weight_params = list(epsilon = epsilon, tau = tau, logbase = logbase),
   globalweight_fun = NULL,
   globalweight_params = list(),
@@ -55,7 +55,7 @@ basket. Has to be generated with \code{get_data}. If \code{data} is used,
 then \code{iter} is ignored.}
 
 \item{weight_fun}{Which functions should be used to calculated the pairwise
-weights? Default is \code{baskexact::weights_fujikawa}.}
+weights? Default is \code{weights_jsd}.}
 
 \item{weight_params}{A list of tuning parameters specific to \code{weight_fun}.
 By default, it takes the function arguments \code{epsilon}, \code{tau} and \code{logbase}.}
@@ -89,7 +89,7 @@ It calculates the details using backends from two different R packages:
 \code{basksim::get_details.fujikawa}.
 \item If \code{design$backend == "exact"}, the details are calculated using
 \code{baskexact::toer}, \code{baskexact::pow} and \code{baskexact::estim}. Note that the
-standard weight function \code{baskexact::weights_fujikawa} calculates the weights
+standard weight function \code{weights_jsd} calculates the weights
 anew for each of the three function calls. This may compromise performance
 and can be fixed by manually calculating the weights beforehand.
 }
