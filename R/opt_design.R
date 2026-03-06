@@ -37,12 +37,14 @@ opt_design.default <- function(design, ...) {
 #' @export
 #'
 #' @examples
-#' design <- setup_fujikawa_x(k = 3, p0 = 0.2)
+#' design <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "sim")
+#' # Usually, you should increase iter in an actual application
 #' opt_design(design = design,
 #'            n = 20, alpha = 0.05,
 #'            design_params = list(epsilon = c(1, 2), tau = c(0, 0.5)),
 #'            scenarios = get_scenarios(design, 0.5),
-#'            prec_digits = 3)
+#'            prec_digits = 3,
+#'            iter = 100)
 opt_design.fujikawa_x <- function(design, n, alpha,
                                   design_params = list(),
                                   scenarios,

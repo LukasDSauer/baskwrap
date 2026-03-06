@@ -14,12 +14,13 @@
 #'  64(5), 934-947.
 #'
 #' @examples
-#' design <- setup_fujikawa_x(k = 4, shape1 = 1, shape2 = 1, p0 = 0.2)
-#' check_mon_within(design = design, n = 24, lambda = 0.99,
+#' design4 <- setup_fujikawa_x(k = 4, shape1 = 1, shape2 = 1, p0 = 0.2)
+#' check_mon_within(design = design4, n = 15, lambda = 0.99,
 #'                  weight_fun = baskexact::weights_fujikawa,
 #'                  weight_params = list(epsilon = 0.5, tau = 0),
 #'                  details = TRUE)
-#' check_mon_between(design = design, n = 24, lambda = 0.99,
+#' design3 <- setup_fujikawa_x(k = 3, shape1 = 1, shape2 = 1, p0 = 0.2)
+#' check_mon_between(design = design3, n = 24, lambda = 0.99,
 #'                   weight_fun = baskexact::weights_fujikawa,
 #'                   weight_params = list(epsilon = c(0.5, 1),
 #'                                        tau = c(0, 0.2, 0.3)),
