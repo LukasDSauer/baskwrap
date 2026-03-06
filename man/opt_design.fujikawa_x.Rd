@@ -71,7 +71,7 @@ using backends from two  different R packages:
 }
 }
 \examples{
-design <- setup_fujikawa_x(k = 3, p0 = 0.2, backend = "sim")
+design <- setup_fujikawa_x(k = 2, p0 = 0.2, backend = "sim")
 # Usually, you should increase iter in  application, e.g. to iter = 1000
 opt_design(design = design,
            n = 10, alpha = 0.05,
