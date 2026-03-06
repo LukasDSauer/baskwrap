@@ -71,12 +71,14 @@ using backends from two  different R packages:
 }
 }
 \examples{
-design <- setup_fujikawa_x(k = 2, p0 = 0.2, backend = "sim")
-# Usually, you should increase iter in  application, e.g. to iter = 1000
+\donttest{
+design <- setup_fujikawa_x(k = 3, p0 = 0.2)
+# In an actual application, usually increase to at least iter = 1000.
 opt_design(design = design,
-           n = 10, alpha = 0.05,
+           n = 20, alpha = 0.05,
            design_params = list(epsilon = c(1, 2), tau = c(0, 0.5)),
            scenarios = get_scenarios(design, 0.5),
            prec_digits = 3,
-           iter = 50)
+           iter = 100)
+}
 }
