@@ -24,7 +24,7 @@ the \code{basksim} package or the \code{baskwrap} package.}
 
 \item{...}{Further arguments.}
 
-\item{n}{The sample size per basket.}
+\item{n}{The sample sizes of the baskets. A vector must be used for varying sample sizes.}
 
 \item{p1}{Probabilities under the alternative hypothesis. If
 \code{length(p1) == 1}, then this is a common probability for all baskets.}

@@ -29,7 +29,7 @@
 
 \item{...}{Further arguments.}
 
-\item{n}{The sample size per basket.}
+\item{n}{The sample sizes of the baskets. A vector must be used for varying sample sizes.}
 
 \item{p1}{Probabilities used for the simulation. If \code{NULL}
 then all probabilities are set to p0.}
@@ -75,7 +75,7 @@ explanation.}
 Default is \code{TRUE}.}
 }
 \value{
-A list containing the rejection probabilites, posterior means,
+A list containing the rejection probabilities, posterior means,
 mean squared errors and mean limits of HDI intervals for all baskets as well
 as the family-wise error rate and the experiment-wise power.
 }
