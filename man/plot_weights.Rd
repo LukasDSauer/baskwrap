@@ -12,6 +12,9 @@ the \code{basksim} package or the \code{baskwrap} package.}
 
 \item{...}{Further arguments.}
 }
+\value{
+A \code{ggplot} object, a plot of the weights.
+}
 \description{
 Generic function for plotting the weights of a basket trial design. Currently
 only implemented for designs of class \code{fujikawa_x}.

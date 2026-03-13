@@ -29,6 +29,10 @@ weights.}
 
 \item{...}{Further arguments.}
 }
+\value{
+A \code{ggplot} object, showing the range of responses in the "other"
+basket on the x-axis and the corresponding weight on the y-axis.
+}
 \description{
 This function is a wrapper of \code{baskexact::plot_weights()}. It visualizes
 the weight functions defined for Fujikawa et al.'s design.

@@ -22,7 +22,7 @@ weights_hld(design, n, epsilon, tau, ...)
 \item{design}{An object of class \code{fujikawa_x} or of class \code{OneStageBasket}
 from the \code{baskexact} package.}
 
-\item{n}{The sample sizes of the baskets. A vector must be used for varying sample sizes.}
+\item{n}{The sample size per basket.}
 
 \item{logbase}{Tuning parameter. The base of the logarithm that is used to
 calculate the Jensen-Shannon divergence.}

@@ -10,11 +10,11 @@ Description: A simple interface to switch between
     integration ("exact") and Monte Carlo simulation ("simulated") for the
     basket trial design by 
     Fujikawa et al. 2020 <doi:10.1002/bimj.201800404>. 
-    The exact implementation is from the baskexact package, see
+    The exact implementation is from the 'baskexact' package, see
     Baumann (2024) <doi:10.1016/j.softx.2024.101793>. The simulated 
-    implementation is from the basksim package, which was developed for
+    implementation is from the 'basksim' package, which was developed for
     Baumann et al. (2024) <doi:10.1080/19466315.2024.2402275>. The package's 
-    syntax is compatible with the basksim syntax and easily extendable.
+    syntax is compatible with the 'basksim' syntax and easily extendable.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

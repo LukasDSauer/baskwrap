@@ -41,7 +41,7 @@ the \code{basksim} package or the \code{baskwrap} package.}
 
 \item{...}{Further arguments.}
 
-\item{n}{The sample sizes of the baskets. A vector must be used for varying sample sizes.}
+\item{n}{The sample size per basket.}
 
 \item{lambda}{The posterior probability threshold.}
 
@@ -59,6 +59,15 @@ global weights.}
 
 \item{details}{Whether the cases where the monotonicity condition is
 violated should be returned, in case there are any.}
+}
+\value{
+If \code{details = FALSE} then only a logical value is returned.
+If \code{details = TRUE} then if there are any cases where the
+within-trial monotonicity condition is violated, a list of these cases and
+their results are returned. If at least one tuning parameter is a vector,
+then an array that shows for which combination of parameters the
+within-trial monotonicity condition holds. In this case, the argument
+\code{details} is ignored.
 }
 \description{
 Generic function for checking monotonicity conditions of a basket trial

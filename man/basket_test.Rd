@@ -12,6 +12,9 @@ the \code{basksim} package or the \code{baskwrap} package.}
 
 \item{...}{Further arguments.}
 }
+\value{
+A numeric vector of posterior probabilities for all strata.
+}
 \description{
 Generic function for calculating the posterior probabilities of a basket trial
 design.

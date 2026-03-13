@@ -29,6 +29,7 @@
 #'
 #' @inheritParams pow
 #' @inherit plot_weights.fujikawa_x examples
+#' @inherit baskexact::check_mon_within return
 #' @export
 check_mon_within <- function(design, ...) {
   UseMethod("check_mon_within", design)

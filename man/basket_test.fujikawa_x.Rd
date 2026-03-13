@@ -20,7 +20,7 @@
 \arguments{
 \item{design}{An object of class \code{fujikawa_x}.}
 
-\item{n}{The sample sizes of the baskets. A vector must be used for varying sample sizes.}
+\item{n}{The sample size per basket.}
 
 \item{r}{A numeric vector of the number of responses in each stratum.}
 

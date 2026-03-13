@@ -5,6 +5,8 @@
 #'
 #' @inheritParams pow
 #' @inherit plot_weights.fujikawa_x examples
+#' @returns A `ggplot` object, a plot of the weights.
+#'
 #' @export
 plot_weights <- function(design, ...) {
   UseMethod("plot_weights", design)
@@ -16,6 +18,8 @@ plot_weights <- function(design, ...) {
 #'
 #' @inheritParams plot_weights
 #' @inheritParams baskexact::plot_weights
+#' @returns A `ggplot` object, showing the range of responses in the "other"
+#' basket on the x-axis and the corresponding weight on the y-axis.
 #' @export
 #'
 #' @examples
