@@ -8,6 +8,8 @@
 [![Codecov test
 coverage](https://codecov.io/gh/LukasDSauer/baskwrap/graph/badge.svg)](https://app.codecov.io/gh/LukasDSauer/baskwrap)
 [![R-CMD-check](https://github.com/LukasDSauer/baskwrap/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/LukasDSauer/baskwrap/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/baskwrap)](https://CRAN.R-project.org/package=baskwrap)
 <!-- badges: end -->
 
 The baskwrap package supplies a unified wrapper to several basket trial
@@ -78,40 +80,40 @@ get_details(design = set_backend(design, "sim"),
             n = n, p1 = p1, lambda = lambda,
             epsilon = epsilon, tau = tau)
 #> $Rejection_Probabilities
-#> [1] 0.174 0.961 0.948
+#> [1] 0.146 0.967 0.958
 #> 
 #> $FWER
-#> [1] 0.174
+#> [1] 0.146
 #> 
 #> $EWP
 #> [1] 0.999
 #> 
 #> $Mean
-#> [1] 0.2367023 0.4891821 0.4880540
+#> [1] 0.2319132 0.4989091 0.4931409
 #> 
 #> $MSE
-#> [1] 0.009438693 0.009745407 0.009909880
+#> [1] 0.009404904 0.009455926 0.009624520
 #> 
 #> $Lower_CL
-#> [1] 0.09531401 0.33277549 0.33140031
+#> [1] 0.09135332 0.34169623 0.33677898
 #> 
 #> $Upper_CL
-#> [1] 0.3917317 0.6456339 0.6448407
+#> [1] 0.3866402 0.6558876 0.6494963
 #> 
 #> $ECD
-#> [1] 2.735
+#> [1] 2.779
 #> 
 #> $Rejection_Probabilities_SE
-#> [1] 0.011988494 0.006122009 0.007021111
+#> [1] 0.011166199 0.005648982 0.006343185
 #> 
 #> $FWER_SE
-#> [1] 0.01198849
+#> [1] 0.0111662
 #> 
 #> $EWP_SE
 #> [1] 0.0009994999
 #> 
 #> $ECD_SE
-#> [1] 0.01445628
+#> [1] 0.01327913
 #> 
 #> $p0
 #> [1] 0.2

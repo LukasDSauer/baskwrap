@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 
 [![Codecov test coverage](https://codecov.io/gh/LukasDSauer/baskwrap/graph/badge.svg)](https://app.codecov.io/gh/LukasDSauer/baskwrap)
 [![R-CMD-check](https://github.com/LukasDSauer/baskwrap/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/LukasDSauer/baskwrap/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/baskwrap)](https://CRAN.R-project.org/package=baskwrap)
 <!-- badges: end -->
 
 The baskwrap package supplies a unified wrapper to several basket trial packages (`basksim` and `baskexact`) using a unified syntax.
